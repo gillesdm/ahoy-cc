@@ -1,4 +1,21 @@
-Create a new spec file for the Figma design at: $ARGUMENTS
+---
+description: Create a new spec file from a Figma design URL
+argument-hint: "[figma-url]"
+allowed-tools: Glob Grep Read Write AskUserQuestion mcp__claude_ai_Figma__get_design_context mcp__claude_ai_Figma__get_screenshot mcp__claude_ai_Figma__get_metadata
+---
+
+$ARGUMENTS is the Figma URL, if provided.
+
+## Before you begin — resolve the Figma URL
+
+If `$ARGUMENTS` is a valid Figma URL (contains `figma.com`), use it directly.
+
+Otherwise, use `AskUserQuestion` to ask:
+
+> Please share the Figma URL for the design you'd like to spec.
+> It should look like: `https://www.figma.com/design/:fileKey/:name?node-id=:nodeId`
+
+Wait for the answer, then use that URL for all subsequent steps.
 
 ## Step 0 — Build the spec inventory
 
