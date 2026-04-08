@@ -1,121 +1,157 @@
-Create a new spec file through a guided interview.
+---
+description: Create a new design spec through a guided interview — name, anatomy, states, props
+argument-hint: "[component-name]"
+allowed-tools: Glob Grep Read Write
+---
 
-The argument (if provided) is the component name or a short description: $ARGUMENTS
+$ARGUMENTS is the component name or description, if provided.
+
+## Before you begin — scan the spec inventory
+
+Silently run Glob on `specs/**/*.md` to build the **spec inventory**. For every file found, record:
+- **canonical name** — filename without extension, lowercased (`button`, `icon-button`)
+- **relative path** — from repo root (`specs/atoms/button.md`)
+- **display name** — from the `# Heading` on line 1, else titlecase the filename
+- **category** — the subfolder (`atoms`, `molecules`, `organisms`, `patterns`, `foundations`)
+
+Do this before sending any message to the user.
+
+If `$ARGUMENTS` closely matches an existing spec's canonical name, open with:
+
+> A spec for **{name}** already exists at `specs/{path}`. Did you mean to update it, or are you creating something with a similar name?
+
+Then stop and wait.
 
 ---
 
-## Step 0 — Scan the spec inventory
+## Interview — one question at a time
 
-Before asking any questions, scan `specs/` to build a live index of what already exists.
-
-For each `.md` file found under `specs/`, record:
-- **canonical name**: filename without extension, lowercased (e.g. `button`, `icon-button`)
-- **relative path** from repo root (e.g. `specs/atoms/button.md`)
-- **display name**: derive from the `# Heading` on line 1, else titlecase the filename
-- **category**: the subfolder it lives in (`atoms`, `molecules`, `organisms`, `patterns`, `foundations`)
-
-Store this as the **spec inventory**. You will use it throughout to detect duplicates and find cross-references.
-
-If `$ARGUMENTS` matches (or closely resembles) an existing spec's canonical name, stop and tell the user:
-> A spec for **{name}** already exists at `specs/{path}`. Did you mean to update it, or are you creating something with a similar name? Clarify before continuing.
+Ask the questions below **one at a time**. Wait for the user's answer before asking the next. After each answer, note what you've learned and use it to make the next question more specific.
 
 ---
 
-## Step 1 — Interview the user
+### Q1 — Name & purpose
 
-Ask all five questions in a **single message**. Do not split them across multiple turns.
+If `$ARGUMENTS` was not provided, open with:
 
-Number each question clearly. Tell the user upfront that the more detail they give, the less you'll need to ask.
+> What component or pattern would you like to spec?
 
----
+Once you have the name (from `$ARGUMENTS` or the user's answer), send:
 
-Here is the message to send:
+> I'll create a spec for **{name}**.
+>
+> **What is it, and what does it do?** Include when to use it and when not to. A sentence or two is fine.
 
----
-
-I'll create a spec file for **{component name from $ARGUMENTS, or "your component" if none given}**. The more detail you give here, the less I'll need to ask later.
-
-**1. Name & purpose**
-What is the component's name, and what does it do? Include when it should be used and when it shouldn't. _(1–4 sentences is fine.)_
-
-**2. Visual anatomy**
-Describe its visual parts — what regions, elements, or pieces make it up, and how they're arranged. For example: _"a row with an icon on the left, a label and sublabel stacked in the middle, and an optional badge on the right"_. Be as rough or detailed as you like.
-
-**3. Sub-components & origin**
-Does it contain other components inside it (e.g. Button, Icon, Badge, Input, Avatar)? List them if so.
-Also: is this from the **Ahoy library** (`@teamleader/ahoy`), a **custom component** you're building, or something in between?
-
-**4. States**
-Which interactive or visual states does it have? List what applies:
-`default` · `hover` · `focus` · `active / selected` · `disabled` · `error` · `loading` · `empty` · `expanded / collapsed` · other
-_(Say "none" if it's a purely static component.)_
-
-**5. Props & configuration**
-What can be configured on this component? List the main props — name, type, and what they control.
-For example: `label (string) — the button text` · `disabled (boolean) — disables interaction` · `size ('small' | 'medium' | 'large') — controls padding and font size`
+After the answer:
+- Extract or confirm the component name
+- Note the primary use case and any anti-patterns
+- Check the spec inventory for related specs that may be relevant as cross-references
+- Form a working hypothesis about category (Atom / Molecule / Organism) — you'll confirm this later without asking
 
 ---
 
-Wait for the user's answers before continuing.
+### Q2 — Visual anatomy
+
+Tailor the example hint to what was described in Q1:
+
+> **Describe its visual parts** — what regions, elements, or pieces make it up, and how are they arranged?
+>
+> _(e.g. {anatomy example relevant to Q1 answer})_
+>
+> As rough or detailed as you like.
+
+After the answer:
+- Identify distinct visual regions and their arrangement
+- Note any sub-components implied (icon, label, badge, button, etc.)
+- Infer which foundation tokens are likely in play (color, spacing, typography, radius, elevation, motion)
 
 ---
 
-## Step 2 — Infer everything you can; ask only what you can't
+### Q3 — Sub-components & origin
 
-From the user's answers, derive as much as possible without asking follow-up questions.
+Pre-populate with what you inferred in Q2:
 
-### 2a — Determine category
+> Based on your description, it looks like it might contain: _{list sub-components inferred from Q2, or omit this line if none were obvious}_. Does that sound right? Anything to add or remove?
+>
+> Also: is this from the **Ahoy library** (`@teamleader/ahoy`), a **custom component**, or a mix?
 
-Use this decision tree — **do not ask the user**. Present your reasoning in the plan (Step 3).
+After the answer:
+- Cross-reference each sub-component against the spec inventory (REFERENCE vs CREATE)
+- Confirm source (Ahoy / custom / mixed)
+- Infer the Ahoy import path if applicable
+
+---
+
+### Q4 — States
+
+Pre-suggest states based on the component type from Q1–Q3:
+
+> **Which states does it have?**
+>
+> Based on what you've described, I'd expect at least: _{inferred states — e.g. `default`, `hover`, `disabled` for an interactive component; or "none, it's purely static" for a layout primitive}_.
+>
+> Confirm, correct, or extend:
+> `default` · `hover` · `focus` · `active / selected` · `disabled` · `error` · `loading` · `empty` · `expanded / collapsed` · other
+
+After the answer: record confirmed states and note any state-specific visual changes.
+
+---
+
+### Q5 — Props & configuration
+
+Pre-fill with likely props inferred from Q1–Q4:
+
+> **What can be configured on this component?**
+>
+> From your description, these props seem likely: _{list inferred props with types — e.g. `label (string)`, `disabled (boolean)`, `size ('sm' | 'md' | 'lg')`; or omit if nothing is obvious}_.
+>
+> Confirm, adjust, or extend. For each prop: name · type · what it controls.
+
+Wait for the answer before moving on.
+
+---
+
+## After the interview — infer without asking
+
+### Determine category
 
 | Signal from the answers | Infer |
-|---|---|
-| Standalone, no sub-components, maps to a single Ahoy primitive | **Atom** |
-| Composes 2+ atoms or sub-components into a named unit with a clear single purpose | **Molecule** |
-| Large, self-contained page section; contains multiple molecules | **Organism** |
-| Layout or structural convention (how things are arranged, not what they are) | **Pattern** |
-| Core visual language (colour, spacing, type, radius, elevation, motion) | **Foundation** |
+|-------------------------|-------|
+| Single Ahoy primitive, no named sub-components | **Atom** |
+| Composes 2+ atoms into a named unit with one clear purpose | **Molecule** |
+| Large, self-contained page section with multiple molecules | **Organism** |
+| Layout or structural convention (how things arrange, not what they are) | **Pattern** |
+| Core visual language (color, spacing, type, radius, elevation, motion) | **Foundation** |
 
-When in doubt between Atom and Molecule: if it contains another named component from the spec inventory, it's at least a Molecule.
+When in doubt between Atom and Molecule: if it contains another named component from the inventory, it's at least a Molecule.
 
-### 2b — Determine filename
+### Determine filename
 
-kebab-case of the component name. Examples: `split-button.md`, `sidebar-menu-item.md`, `empty-state.md`.
+kebab-case of the component name. Examples: `split-button.md`, `empty-state.md`.
 
-### 2c — Identify foundations consumed
+### Match sub-components
 
-From the anatomy, props, and states described, infer which foundation tokens the component likely uses:
+For each sub-component named in Q3:
+- Found in inventory → **REFERENCE** (no new file, link it in Uses)
+- Not found + independently reusable → **CREATE** (new spec file)
 
-- Text colour, background, border → [Color](../specs/foundations/color.md)
-- Margin, padding, gap → [Spacing](../specs/foundations/spacing.md)
-- Font size, weight, line height → [Typography](../specs/foundations/typography.md)
-- Rounded corners → [Radius](../specs/foundations/radius.md)
-- Drop shadow, depth → [Elevation](../specs/foundations/elevation.md)
-- Transitions, animations → [Motion](../specs/foundations/motion.md)
+Only create a sub-component spec if it can stand alone. A purely decorative grouping that only exists inside this component is not independently reusable.
 
-### 2d — Match sub-components to the spec inventory
+### Identify foundations consumed
 
-For every sub-component the user mentioned in Q3:
-- Normalise the name (lowercase, no spaces/punctuation)
-- Check against the spec inventory
-- If found → mark as **REFERENCE** (no new file)
-- If not found → mark as **CREATE** (new spec)
-
-Only create a sub-component spec if it is independently reusable. A purely decorative grouping that only exists inside this component is not independently reusable.
-
-### 2e — Infer the import path
-
-- Ahoy components: `import { ComponentName } from '@teamleader/ahoy/dist/es/components/{name}'`
-- Custom components: note it as custom, no import path
-- Unknown: leave a `TODO` placeholder
+Infer from anatomy, props, and states:
+- Text color, background, border → Color
+- Margin, padding, gap → Spacing
+- Font size, weight, line height → Typography
+- Rounded corners → Radius
+- Drop shadow, depth → Elevation
+- Transitions, animations → Motion
 
 ---
 
-## Step 3 — Present the plan
+## Present the plan
 
-Present the plan and ask for approval in a single message. **Do not write any files yet.**
-
-Format:
+Send a single message with the plan below, then wait. **Do not write any files yet.**
 
 ---
 
@@ -123,51 +159,43 @@ Here's my plan for the **{ComponentName}** spec:
 
 **Category:** {Atom | Molecule | Organism | Pattern} — _{one-sentence reasoning}_
 
-**Output file:** `specs/{category}/{filename}.md`
+**Output:** `specs/{category}/{filename}.md`
 
 **Will CREATE** (new spec files):
-- `specs/{category}/{filename}.md` ← the main spec
-- `specs/{category}/{sub-component}.md` ← _(only if sub-component is unspecced and independently reusable)_
+- `specs/{category}/{filename}.md` ← main spec
+- `specs/{category}/{sub-component}.md` ← _(only if unspecced and independently reusable)_
 
 **Will REFERENCE** (already specced — no new file):
 - `specs/atoms/button.md` → Button
-- `specs/foundations/color.md` → colour tokens
+- `specs/foundations/color.md` → Color tokens
 
-**Foundations inferred from your description:**
-- Color, Spacing, Typography _(list what applies)_
+**Foundations inferred from your description:** Color · Spacing · Typography _(list what applies)_
 
-**What I'll fill in from your answers:**
-- ✅ Anatomy · States · Props / API · Code example · Uses / Used by
-
-**What I'm less certain about** _(will mark as TODO in the spec)_:
-- {any gap — e.g. exact prop types, import path, non-tokenised dimensions}
+**Gaps I'll mark as TODO:**
+- _{any unknowns — exact prop types, import path, non-tokenised dimensions}_
 
 How would you like to proceed?
 
 **1. Proceed** — write the spec as planned
-**2. Proceed with adjustments** — write it, but apply the note you add below
-**3. Re-plan** — discard this plan, re-analyse with your note as new guidance
+**2. Proceed with adjustments** — write it and apply the note you add below
+**3. Re-plan** — discard this plan and re-analyse with your note as new guidance
 **4. Cancel** — stop, write nothing
 
-_Select a number and optionally add a note (e.g. "2 – it's actually a molecule, and it also contains a tooltip")_
+_Select a number and optionally add a note (e.g. "2 – it's actually a molecule, also add a tooltip sub-component")_
 
 ---
-
-Wait for the user's response before writing anything.
 
 **Interpret the response:**
 - `1` or blank → proceed exactly as planned
-- `2 [note]` → proceed but incorporate the note
-- `3 [note]` → revise the plan with the note as updated guidance; present a new plan before writing
-- `4` → stop immediately, confirm cancellation
+- `2 [note]` → proceed and incorporate the note while writing
+- `3 [note]` → revise the plan with the note; present a new plan before writing
+- `4` → stop, confirm cancellation
 
 ---
 
-## Step 4 — Write the spec
+## Write the spec
 
-Use this template. Populate every section from the interview answers. Omit sections that genuinely don't apply (e.g. no Props/API for a purely visual Foundation; no States for a static layout primitive). Mark anything genuinely unknown as `TODO`.
-
----
+Populate every section from the interview answers. Omit sections that genuinely don't apply (no Props/API for a Foundation; no States for a static layout primitive). Mark anything genuinely unknown as `TODO`.
 
 ```markdown
 # {ComponentName}
@@ -183,14 +211,15 @@ Use this template. Populate every section from the interview answers. Omit secti
 
 **When to use:**
 - {primary use case from Q1}
-- {secondary use case from Q1}
 
 **When not to use:**
 - {anti-pattern from Q1, or "TODO — add guidance"}
 
 ## Anatomy
 
-{ASCII box diagram derived from Q2. Label every visual region.}
+```
+{ASCII box diagram derived from Q2 — label every visual region}
+```
 
 1. **Root** — {description}
 2. **{Part}** — {description}
@@ -224,12 +253,10 @@ Use this template. Populate every section from the interview answers. Omit secti
 ```tsx
 {import statement}
 
-{minimal realistic usage snippet covering the 2–3 most common cases}
+{minimal realistic usage covering 2–3 common cases}
 ```
 
 ## Uses
-
-{Link every foundation consumed and every sub-component referenced from the spec inventory.}
 
 - [Color](../foundations/color.md) — `--color-*` tokens consumed
 - [Spacing](../foundations/spacing.md) — `--space-*` tokens consumed
@@ -240,17 +267,15 @@ Use this template. Populate every section from the interview answers. Omit secti
 _No known usages yet._
 ```
 
----
-
 ### Token rules
 
-- Never write raw hex, `rgb()`, `hsl()`, pixel values, or `ms` durations directly
+- Never write raw hex, `rgb()`, `hsl()`, pixel values, or `ms` durations
 - All visual properties must map to a `var(--token)` from `specs/tokens/token-reference.md` Layer 2
-- Non-tokenised structural values are allowed but must be called out in a separate table with a reason
+- Non-tokenised structural values are allowed but must appear in a separate table with a reason
 
 ---
 
-## Step 5 — Confirm and summarise
+## Confirm and summarise
 
 After writing, print:
 
@@ -258,13 +283,12 @@ After writing, print:
 Created:
   specs/{category}/{filename}.md
 
-Referenced (no new file — already specced):
+Referenced (no new file):
   specs/atoms/button.md
   specs/foundations/color.md
 
 TODOs left in the spec:
-  - Import path (unknown — mark as TODO if custom and not confirmed)
-  - {any other gaps}
+  - {any gaps}
 
-Next: open the spec file and fill in any TODOs, or run /figma-spec with a Figma URL to enrich it with visual data.
+Next: open the spec to fill in TODOs, or run /figma-spec with a Figma URL to enrich it with visual data.
 ```
