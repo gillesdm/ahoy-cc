@@ -1,6 +1,6 @@
 # Figma Integration
 
-The `/create-spec` command turns any Figma component directly into a spec file — without writing anything yourself.
+The `/figma-spec` command turns any Figma component directly into a spec file — without writing anything yourself.
 
 ---
 
@@ -9,20 +9,20 @@ The `/create-spec` command turns any Figma component directly into a spec file �
 Select a frame or component in Figma, copy its link, then paste it into Claude Code:
 
 ```
-/create-spec https://www.figma.com/design/YOUR_FILE_KEY/File-Name?node-id=123-456
+/figma-spec https://www.figma.com/design/YOUR_FILE_KEY/File-Name?node-id=123-456
 ```
 
 **Where to find the URL in Figma:**
 1. Select the frame or component you want to spec
 2. Right-click → **Copy link to selection**
-3. Paste it after `/create-spec`
+3. Paste it after `/figma-spec`
 
 > [!TIP]
 > For best results, select a **named component frame** — not a raw group or a page. Named Figma components produce richer spec output with correct token mappings and state documentation.
 
 ---
 
-## What `/create-spec` does
+## What `/figma-spec` does
 
 1. **Reads the Figma design** — fetches the component tree, screenshot, and design tokens directly from the Figma API
 2. **Scans existing specs** — checks what's already specced so it never creates a duplicate
@@ -78,7 +78,7 @@ A frame called "Notification Banner / Default" produces a much richer spec than 
 If your component has hover, focus, disabled, and error states, select the component set (not a single variant). Claude will document all states in one pass.
 
 **Use Figma variables where possible.**
-When your Figma file uses variables that map to Ahoy tokens, `/create-spec` can resolve them automatically. If you're using raw hex values in Figma, Claude will still find the closest token match — but named variables are more reliable.
+When your Figma file uses variables that map to Ahoy tokens, `/figma-spec` can resolve them automatically. If you're using raw hex values in Figma, Claude will still find the closest token match — but named variables are more reliable.
 
 **Spec sub-components separately first.**
 If a complex component (e.g. a notification banner) contains a sub-component (e.g. a custom icon badge) that doesn't have a spec yet, spec the sub-component first. Then spec the parent. This gives Claude the dependency chain it needs.
@@ -93,4 +93,4 @@ Once the spec files exist, Claude will use them automatically any time you ask t
 Build the notification banner from specs/organisms/notification-banner.md.
 ```
 
-If the spec needs updating after a Figma design change, re-run `/create-spec` with the same URL. Claude will detect the existing spec and offer to update it rather than duplicate it.
+If the spec needs updating after a Figma design change, re-run `/figma-spec` with the same URL. Claude will detect the existing spec and offer to update it rather than duplicate it.

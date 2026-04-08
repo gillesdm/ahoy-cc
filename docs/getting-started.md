@@ -12,7 +12,7 @@ You need the following installed. If you're unsure about any of these, ask a dev
 |---|---|---|
 | [Node.js](https://nodejs.org) v18+ | Runs the prototype and the audit script | `node --version` |
 | [Claude Code](https://claude.ai/code) | The AI assistant that reads specs and writes code | `claude --version` |
-| A Figma account | Required only for `/create-spec` | — |
+| A Figma account | Required only for `/figma-spec` | — |
 
 > [!TIP]
 > On macOS, the easiest way to install Node.js is via [nvm](https://github.com/nvm-sh/nvm):

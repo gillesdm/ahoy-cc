@@ -113,7 +113,7 @@ Each spec file follows the same structure so Claude always knows where to look:
 If Claude can't find a spec for what you're building, you have two options:
 
 **Option 1 — Generate it from Figma**
-If the component exists in Figma, use `/create-spec` to generate the spec automatically. See [Figma Integration](./figma.md).
+If the component exists in Figma, use `/figma-spec` to generate the spec automatically. See [Figma Integration](./figma.md).
 
 **Option 2 — Ask Claude to infer from the closest spec**
 ```

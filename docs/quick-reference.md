@@ -10,7 +10,7 @@ Fast lookup tables for specs, tokens, and commands.
 |---|---|
 | `npm run dev` | Start the live prototype at `http://localhost:5173` |
 | `node scripts/token-audit.js` | Check for raw values that should be tokens |
-| `/create-spec <figma-url>` | Generate a spec file from a Figma component |
+| `/figma-spec <figma-url>` | Generate a spec file from a Figma component |
 | `claude` | Open Claude Code in the current directory |
 
 ---

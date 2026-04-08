@@ -38,7 +38,7 @@ Two things working together:
 | [Getting Started](docs/getting-started.md) | Prerequisites, installation, starting the prototype |
 | [Using Claude Code](docs/using-claude.md) | How to prompt Claude, example conversations, tips |
 | [The Spec System](docs/spec-system.md) | Folder structure, spec anatomy, the four tiers |
-| [Figma Integration](docs/figma.md) | `/create-spec` workflow, tips for good output |
+| [Figma Integration](docs/figma.md) | `/figma-spec` workflow, tips for good output |
 | [Tokens & Audit](docs/tokens.md) | Token reference tables, running the audit, fixing violations |
 | [Developer Handoff](docs/handoff.md) | Handoff checklist, what developers receive |
 | [Quick Reference](docs/quick-reference.md) | All spec lookups, token cheat sheet, key commands |
@@ -71,7 +71,7 @@ Describe what you want to build. Claude handles the rest.
 |---|---|
 | `npm run dev` | Start the live prototype |
 | `node scripts/token-audit.js` | Check for raw values that should be tokens |
-| `/create-spec <figma-url>` | Generate a spec file from a Figma component |
+| `/figma-spec <figma-url>` | Generate a spec file from a Figma component |
 
 ---
 

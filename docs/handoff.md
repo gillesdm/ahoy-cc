@@ -25,7 +25,7 @@ Before passing the prototype to a developer, verify the following:
   node scripts/token-audit.js
   ```
 - [ ] All components you've added have a corresponding spec in `specs/`
-- [ ] Any Figma components without a spec have been run through `/create-spec`
+- [ ] Any Figma components without a spec have been run through `/figma-spec`
 
 ---
 
