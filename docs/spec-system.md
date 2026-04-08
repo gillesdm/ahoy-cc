@@ -110,12 +110,23 @@ Each spec file follows the same structure so Claude always knows where to look:
 
 ## If a spec doesn't exist yet
 
-If Claude can't find a spec for what you're building, you have two options:
+If Claude can't find a spec for what you're building, you have three options:
 
-**Option 1 — Generate it from Figma**
-If the component exists in Figma, use `/figma-spec` to generate the spec automatically. See [Figma Integration](./figma.md).
+**Option 1 — Interview-based spec (no Figma needed)**
+Use `/create-spec` to walk through a short Q&A. Claude asks about the component's purpose, anatomy, states, and props — then writes the spec from your answers. Category and filename are inferred automatically; you confirm before anything is written.
 
-**Option 2 — Ask Claude to infer from the closest spec**
+```
+/create-spec NotificationBadge
+```
+
+**Option 2 — Generate it from Figma**
+If the component exists in Figma, use `/figma-spec` to generate the spec directly from the design. See [Figma Integration](./figma.md).
+
+```
+/figma-spec https://www.figma.com/design/...
+```
+
+**Option 3 — Ask Claude to infer from the closest spec**
 ```
 There's no spec for the notification badge yet.
 Use specs/atoms/badge.md as the closest reference and apply the same token conventions.
