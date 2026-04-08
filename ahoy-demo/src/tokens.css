@@ -1,0 +1,190 @@
+/*
+ * tokens.css — Design System Token Layer
+ *
+ * THREE LAYERS:
+ *
+ * Layer 1  Upstream Ahoy tokens (injected by @teamleader/ahoy/dist/es/index.css)
+ *          Listed here as comments for LLM/IDE discoverability. Do NOT redefine.
+ *
+ * Layer 2  Project aliases (defined in :root below).
+ *          Reference Layer 1 tokens with raw fallbacks.
+ *          Components MUST use these — never raw values or Layer 1 directly.
+ *
+ * Layer 3  Components (App.css, etc.)
+ *          Use only Layer 2 aliases via var(--token).
+ *
+ * IMPORT ORDER — tokens.css must come after ahoy:
+ *   import '@teamleader/ahoy/dist/es/index.css';
+ *   import './tokens.css';
+ */
+
+/* =====================================================================
+ * LAYER 1 REFERENCE: @teamleader/ahoy upstream tokens
+ * Source: node_modules/@teamleader/ahoy/dist/es/index.css
+ * Already injected at runtime — listed here for discoverability only.
+ *
+ * COLORS (HSL-based, each has lightest / light / base / dark / darkest)
+ *   Families: aqua · gold · neutral · mint · ruby · teal · violet · black · white
+ *   Key values:
+ *     --color-mint              hsl(180, 100%, 34.9%)    Brand primary (CTA green)
+ *     --color-mint-lightest     hsl(180,  50%, 96.08%)   Subtle mint background
+ *     --color-mint-dark         hsl(181, 100%, 27.45%)   Hover / active mint
+ *     --color-teal-darkest      hsl(220, 10.34%, 11.37%) Body text
+ *     --color-teal-dark         hsl(211, 29.41%, 23.33%) Subtle / secondary text
+ *     --color-neutral-lightest  hsl(0,   0%,   100%)     Page background (white)
+ *     --color-neutral-light     hsl(240, 23.08%, 97.45%) Subtle surface background
+ *     --color-neutral           hsl(240,  3.85%, 89.8%)  Muted background
+ *     --color-neutral-dark      hsl(240,  3.28%, 76.08%) Default border
+ *     --color-ruby-dark         hsl(15,  81.96%, 50%)    Error state
+ *     --color-gold-dark         hsl(40,  100%,  46.47%)  Warning state
+ *     --color-white / --color-black
+ *
+ * SPACING  (spacer-unit = 3px; all values: multiples of 3px)
+ *   --spacer-smallest    3px   (1 × 3px)
+ *   --spacer-smaller     6px   (2 × 3px)
+ *   --spacer-small      12px   (4 × 3px)
+ *   --spacer-regular    18px   (6 × 3px)
+ *   --spacer-medium     24px   (8 × 3px)
+ *   --spacer-big        36px   (12 × 3px)
+ *   --spacer-bigger     48px   (16 × 3px)
+ *   --spacer-biggest    72px   (24 × 3px)
+ *
+ * BORDER RADIUS
+ *   --border-radius-small    2px
+ *   --border-radius-medium   4px
+ *   --border-radius-large    8px
+ *   --border-radius-round   50%
+ *
+ * SHADOWS
+ *   --box-shadow-100   0 1px  1px 0 rgba(42,59,77,.12)   Subtle
+ *   --box-shadow-200   0 2px  6px 0 rgba(42,59,77,.24)   Normal
+ *   --box-shadow-300   0 6px 10px 0 rgba(42,59,77,.24)   Raised
+ *   --box-shadow-400   0 24px 32px 0 rgba(42,59,77,.36)  Floating
+ *
+ * TYPOGRAPHY
+ *   --unit                   10px
+ *   --font-family-inter      'Inter', trebuchet ms, verdana, Arial, sans-serif
+ *   Type scale (all calc-based from --unit):
+ *     .text-small / .ui-text-small      12px  (1.2 × unit)
+ *     .text-body / .ui-text-body        14px  (1.4 × unit)
+ *     .text-display / .ui-text-display  16px  (1.6 × unit)
+ *     .heading-5                        14px  weight 600
+ *     .heading-4                        12px  weight 700  UPPERCASE
+ *     .heading-3                        16px  weight 500
+ *     .heading-2                        18px  weight 500
+ *     .heading-1                        24px  weight 700
+ *
+ * ANIMATION
+ *   --animation-duration                  0.35s
+ *   --animation-delay                     0.07s  (duration ÷ 5)
+ *   --animation-curve-default             cubic-bezier(0.4, 0, 0.2, 1)
+ *   --animation-curve-fast-out-slow-in    cubic-bezier(0.4, 0, 0.2, 1)
+ *   --animation-curve-linear-out-slow-in  cubic-bezier(0, 0, 0.2, 1)
+ *   --animation-curve-fast-out-linear-in  cubic-bezier(0.4, 0, 1, 1)
+ * ===================================================================== */
+
+
+/* =====================================================================
+ * LAYER 2: Project aliases — reference Layer 1 with raw fallbacks.
+ * Components MUST use these variables, not Layer 1 tokens directly.
+ * ===================================================================== */
+:root {
+
+  /* ---- Colors: Semantic ---- */
+  --color-text:           var(--color-teal-darkest,  #1c1e22);
+  --color-text-subtle:    var(--color-teal-dark,     #293b4d);
+  --color-bg:             var(--color-neutral-lightest, #ffffff);
+  --color-surface:        var(--color-white,          #ffffff);
+  --color-border:         var(--color-neutral-dark,   #bebfc7);
+  --color-accent:         var(--color-mint,           #00b2b2);
+  --color-accent-bg:      var(--color-mint-lightest,  #f0fafa);
+  --color-accent-border:  var(--color-mint-dark,      #008c8c);
+  --color-focus:          var(--color-mint,           #00b2b2);
+  --color-link:           var(--color-teal-darkest,   #1c1e22);
+  --color-link-bg:        var(--color-neutral-light,  #f7f7fb);
+  --color-error:          var(--color-ruby-dark,      #e05c1a);
+  --color-success:        var(--color-mint-dark,      #008c8c);
+  --color-warning:        var(--color-gold-dark,      #ed9b00);
+
+  /* Legacy variable names used in App.css (mapped to semantic tokens above) */
+  --accent:               var(--color-accent);
+  --accent-bg:            var(--color-accent-bg);
+  --accent-border:        var(--color-accent-border);
+  --border:               var(--color-border);
+  --text-h:               var(--color-text);
+  --social-bg:            var(--color-link-bg);
+  --shadow:               var(--box-shadow-200);
+
+  /* ---- Spacing scale (8 steps, anchored to Ahoy spacers where aligned) ---- */
+  /* Use --space-N for general spacing. Use --spacer-* directly only when    */
+  /* you need Ahoy's exact naming convention (e.g. in component libraries).  */
+  --space-1:   var(--spacer-smallest,  3px);   /*  3px */
+  --space-2:   var(--spacer-smaller,   6px);   /*  6px */
+  --space-3:   8px;                             /*  8px — list/link gap      */
+  --space-4:   var(--spacer-small,    12px);   /* 12px */
+  --space-5:   var(--spacer-regular,  18px);   /* 18px */
+  --space-6:   var(--spacer-medium,   24px);   /* 24px */
+  --space-7:   var(--spacer-big,      36px);   /* 36px */
+  --space-8:   var(--spacer-bigger,   48px);   /* 48px */
+  --space-9:   var(--spacer-biggest,  72px);   /* 72px */
+
+  /* Project-specific tokens (values outside the Ahoy spacer scale) */
+  --space-xxs:     5px;   /* counter block padding (tight, intentional)   */
+  --space-xs-alt:  10px;  /* counter inline padding                       */
+  --space-icon:    16px;  /* icon margin-bottom; matches body font size   */
+  --space-mobile:  20px;  /* mobile horizontal padding                    */
+  --space-icon-lg: 22px;  /* icon element dimensions                      */
+  --space-gap-lg:  25px;  /* center section column gap                    */
+  --space-section: 32px;  /* standard section padding                     */
+  --space-spacer:  88px;  /* desktop spacer bar height                    */
+
+  /* ---- Typography ---- */
+  --font-family-base:      var(--font-family-inter, 'Inter', sans-serif);
+  --font-size-xs:          calc(1.2 * var(--unit, 10px));  /* 12px */
+  --font-size-sm:          calc(1.4 * var(--unit, 10px));  /* 14px */
+  --font-size-base:        calc(1.6 * var(--unit, 10px));  /* 16px */
+  --font-size-lg:          calc(1.8 * var(--unit, 10px));  /* 18px */
+  --font-size-xl:          calc(2.4 * var(--unit, 10px));  /* 24px */
+  --font-weight-regular:   400;
+  --font-weight-medium:    500;
+  --font-weight-semibold:  600;
+  --font-weight-bold:      700;
+  --line-height-tight:     calc(1.8 * var(--unit, 10px));  /* 18px */
+  --line-height-base:      calc(2.1 * var(--unit, 10px));  /* 21px */
+  --line-height-loose:     calc(2.4 * var(--unit, 10px));  /* 24px */
+  --line-height-heading:   calc(3   * var(--unit, 10px));  /* 30px */
+
+  /* ---- Border Radius ---- */
+  --radius-sm:       var(--border-radius-small,   2px);
+  --radius-md:       var(--border-radius-medium,  4px);
+  --radius-lg:       var(--border-radius-large,   8px);
+  --radius-round:    var(--border-radius-round,  50%);
+  --radius-counter:  5px;  /* .counter — between md(4px) and lg(8px)     */
+  --radius-link:     6px;  /* link pill radius                            */
+
+  /* ---- Elevation / Shadows ---- */
+  --elevation-1:  var(--box-shadow-100);  /* 0 1px  1px 0 rgba(42,59,77,.12) — subtle   */
+  --elevation-2:  var(--box-shadow-200);  /* 0 2px  6px 0 rgba(42,59,77,.24) — normal   */
+  --elevation-3:  var(--box-shadow-300);  /* 0 6px 10px 0 rgba(42,59,77,.24) — raised   */
+  --elevation-4:  var(--box-shadow-400);  /* 0 24px 32px 0 rgba(42,59,77,.36) — floating */
+
+  /* ---- Z-Index scale ---- */
+  --z-below:    -1;
+  --z-base:      0;
+  --z-above:     1;
+  --z-overlay:  10;
+  --z-modal:   100;
+  --z-toast:  1000;
+
+  /* ---- Motion / Transitions ---- */
+  --duration-fast:      var(--animation-duration, 0.35s);
+  --duration-base:      0.3s;
+  --easing-default:     var(--animation-curve-default,              cubic-bezier(0.4, 0, 0.2, 1));
+  --easing-enter:       var(--animation-curve-linear-out-slow-in,   cubic-bezier(0,   0, 0.2, 1));
+  --easing-exit:        var(--animation-curve-fast-out-linear-in,   cubic-bezier(0.4, 0, 1,   1));
+  --transition-border:  border-color var(--duration-base) var(--easing-default);
+  --transition-shadow:  box-shadow   var(--duration-base) var(--easing-default);
+
+  /* ---- Breakpoints (reference only — cannot use var() inside @media) ---- */
+  /* --breakpoint-md: 1024px;  Use literal 1024px in media queries.         */
+}
