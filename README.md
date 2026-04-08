@@ -1,6 +1,9 @@
 <p align="center">
-  <h1>Teamleader Design Specs</h1>
-  <p>A living spec system and interactive prototype environment for the Teamleader product —<br>powered by the <a href="https://github.com/teamleader/ahoy">Ahoy</a> design system and Claude Code.</p>
+  <img src="assets/banner.png" alt="Teamleader Design Specs" width="100%" />
+</p>
+
+<p align="center">
+  A living spec system and interactive prototype environment for the Teamleader product —<br>powered by the <a href="https://github.com/teamleader/ahoy">Ahoy</a> design system and Claude Code.
 </p>
 
 <p align="center">
