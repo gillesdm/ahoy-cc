@@ -89,7 +89,12 @@ import './tokens.css'    // Must come after ahoy CSS
 | IconButton atom spec | `specs/atoms/icon-button.md` |
 | Counter molecule spec | `specs/molecules/counter.md` |
 | Hero molecule spec | `specs/molecules/hero.md` |
+| SidebarMenuItem molecule spec | `specs/molecules/sidebar-menu-item.md` |
 | Next Steps organism spec | `specs/organisms/next-steps.md` |
+| Sidebar organism spec | `specs/organisms/sidebar.md` |
 | Layout patterns spec | `specs/patterns/layout.md` |
-| Ahoy component library | `specs/components/` |
+| All atom specs | `specs/atoms/` |
+| All molecule specs | `specs/molecules/` |
+| All organism specs | `specs/organisms/` |
+| All pattern specs | `specs/patterns/` |
 | Token audit script | `scripts/token-audit.js` |

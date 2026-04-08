@@ -213,7 +213,11 @@ The prototype is in ahoy-demo/src/. It follows the specs in specs/. Run the toke
 | Build a hero / logo section | [`specs/molecules/hero.md`](molecules/hero.md) |
 | Build a navigation link section | [`specs/organisms/next-steps.md`](organisms/next-steps.md) |
 | Lay out a page | [`specs/patterns/layout.md`](patterns/layout.md) |
+| Build a sidebar nav | [`specs/organisms/sidebar.md`](organisms/sidebar.md) |
 | Understand colour | [`specs/foundations/color.md`](foundations/color.md) |
 | Understand spacing | [`specs/foundations/spacing.md`](foundations/spacing.md) |
 | See every token in one place | [`specs/tokens/token-reference.md`](tokens/token-reference.md) |
-| Browse all 76 Ahoy components | [`specs/components/`](components/) |
+| Browse atoms | [`specs/atoms/`](atoms/) |
+| Browse molecules | [`specs/molecules/`](molecules/) |
+| Browse organisms | [`specs/organisms/`](organisms/) |
+| Browse layout patterns | [`specs/patterns/`](patterns/) |
