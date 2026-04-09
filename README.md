@@ -82,14 +82,35 @@ The shell layout (sidebar + top bar + content area) follows [specs/patterns/layo
 
 ## Key commands
 
+**Terminal**
+
 | Command | What it does |
 |---|---|
 | `npm run dev` | Start the live prototype |
 | `node scripts/token-audit.js` | Check for raw values that should be tokens |
-| `/figma-spec <figma-url>` | Create a spec from a Figma component |
+
+**Setup** — run once per machine
+
+| Command | What it does |
+|---|---|
+| `/get-started` | Interactive wizard — install Figma MCP and/or Playwright MCP |
+| `/setup-figma-mcp` | Install the Figma integration (lets Claude read Figma URLs) |
+| `/setup-playwright-mcp` | Install the Playwright integration (lets Claude control a browser) |
+
+**Specs**
+
+| Command | What it does |
+|---|---|
+| `/figma-spec <figma-url>` | Create a spec from a Figma design URL |
 | `/create-spec <name>` | Create a spec via guided Q&A interview |
-| `/create-component-from-spec <spec>` | Scaffold a React component from an existing spec |
 | `/spec-lookup <description>` | Surface relevant specs before building |
+
+**Building**
+
+| Command | What it does |
+|---|---|
+| `/create-component-from-spec <spec>` | Scaffold a React component from an existing spec |
+| `/playwright-import "URL" ["action"]` | Open a real page in a browser, map it to Ahoy components, generate a prototype page |
 
 ---
 
