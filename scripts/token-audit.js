@@ -93,6 +93,13 @@ const FONT_WEIGHT_TOKENS = {
   '900': 'var(--font-weight-bold)     /* closest: bold=700 */',
 };
 
+const LETTER_SPACING_TOKENS = {
+  '0.06em': 'var(--letter-spacing-caps)',
+  '0.08em': 'var(--letter-spacing-caps-wide)',
+  '0.6px':  'var(--letter-spacing-caps)  /* prefer em: 0.06em */',
+  '0.05em': 'var(--letter-spacing-caps)  /* prefer em: 0.06em */',
+};
+
 // ─── Property → checker config ───────────────────────────────────────────────
 // type 'error' = must be zero for CI pass
 // type 'warning' = informational, CI passes
@@ -128,6 +135,10 @@ const PROPERTY_CHECKS = [
   { props: ['font-weight'],
     type: 'error', pattern: /\b(100|200|300|400|500|600|700|800|900)\b/, map: FONT_WEIGHT_TOKENS,
     label: 'hardcoded font-weight' },
+
+  { props: ['letter-spacing'],
+    type: 'error', pattern: /\b\d+\.?\d*(px|em|rem)\b/, map: LETTER_SPACING_TOKENS,
+    label: 'hardcoded letter-spacing' },
 
   // Colors — error
   { props: ['color','background','background-color','border-color',

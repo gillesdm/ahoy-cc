@@ -15,11 +15,15 @@
 
 .app-main {
   flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.app-main__center {
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow-y: auto;
-  min-height: 0;
+  height: 100%;
 }
 
 .counter {

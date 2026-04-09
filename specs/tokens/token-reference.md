@@ -100,6 +100,9 @@ Master map of every CSS custom property defined in `ahoy-demo/src/tokens.css`.
 | `--line-height-base` | `calc(2.1 * var(--unit))` = 21px | Body |
 | `--line-height-loose` | `calc(2.4 * var(--unit))` = 24px | Relaxed |
 | `--line-height-heading` | `calc(3 * var(--unit))` = 30px | Headings |
+| `--letter-spacing-caps` | `0.06em` | Standard UPPERCASE tracking (H4, section headers) |
+| `--letter-spacing-caps-wide` | `0.08em` | Wide UPPERCASE tracking (eyebrow / decorative) |
+| `--font-feature-tabular` | `'lnum' 1, 'tnum' 1` | Monospaced / numeric text |
 
 ---
 
