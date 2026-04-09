@@ -115,6 +115,33 @@ import ReportsPage from './pages/Reports';
 node scripts/token-audit.js   # must exit 0
 ```
 
+## Claude Commands
+
+All commands live in `.claude/commands/` and are available as slash commands in Claude Code.
+
+### Setup
+
+| Command | Description |
+|---------|-------------|
+| `/get-started` | Interactive wizard — install Figma MCP and/or Playwright MCP in one step |
+| `/setup-figma-mcp` | Install Figma MCP into `~/.claude/settings.json` + auth instructions |
+| `/setup-playwright-mcp` | Install Playwright MCP into `~/.claude/settings.json` |
+
+### Specs
+
+| Command | Argument | Description |
+|---------|----------|-------------|
+| `/create-spec [name]` | Component name | Create a new design spec through a guided interview |
+| `/figma-spec [url]` | Figma URL | Generate a spec file from a Figma design |
+| `/spec-lookup [description]` | Feature/component description | Look up relevant specs before building UI |
+
+### Development
+
+| Command | Argument | Description |
+|---------|----------|-------------|
+| `/create-component-from-spec [spec]` | Spec path or component name | Generate a React component from a spec, wiring Ahoy imports automatically |
+| `/playwright-import "URL" ["action"]` | URL + optional action | Scrape a page with Playwright, map it to Ahoy components, generate a full prototype page |
+
 ## File Map
 
 | Purpose | Path |
