@@ -9,6 +9,7 @@ The project serves as a reference implementation for how Ahoy integrates with a 
 
 - **Framework:** React 18, TypeScript
 - **Build:** Vite 6
+- **Routing:** React Router v7 (`react-router-dom`) — `<BrowserRouter>` in `main.tsx`, routes defined in `App.tsx`
 - **Design System:** `@teamleader/ahoy` v3.4.0
 - **Styling:** CSS custom properties (no CSS modules, no Tailwind)
 
@@ -72,6 +73,48 @@ import '@teamleader/ahoy/dist/es/index.css'
 import './tokens.css'    // Must come after ahoy CSS
 ```
 
+## Adding a new page
+
+Follow these four steps to add a routed page to the app shell:
+
+### 1. Add a nav item in `Sidebar.tsx`
+
+Add an entry to `NAV_ITEMS`. Pick the right icon from `@teamleader/ahoy/dist/es/assets/icons/components/`:
+
+```tsx
+{ label: 'Reports', path: '/reports', icon: <Svg24X24StatsFilled /> },
+```
+
+The sidebar will render the link automatically. The TopBar heading is derived from `label` via `PATH_LABELS` in `App.tsx`.
+
+### 2. Create the page component
+
+Create `ahoy-demo/src/pages/Reports.tsx` (and a matching `Reports.css` if needed).
+Read the relevant spec in `specs/` before writing any UI. All styling must use `var(--token)` references — no raw values.
+
+```tsx
+// ahoy-demo/src/pages/Reports.tsx
+export default function ReportsPage() {
+  return <div className="reports-page">…</div>;
+}
+```
+
+### 3. Register the route in `App.tsx`
+
+Import the component and add a `<Route>` inside `<Routes>`:
+
+```tsx
+import ReportsPage from './pages/Reports';
+// …
+<Route path="/reports" element={<ReportsPage />} />
+```
+
+### 4. Run the token audit
+
+```bash
+node scripts/token-audit.js   # must exit 0
+```
+
 ## File Map
 
 | Purpose | Path |
@@ -79,6 +122,9 @@ import './tokens.css'    // Must come after ahoy CSS
 | Token definitions (Layer 2) | `ahoy-demo/src/tokens.css` |
 | Global reset | `ahoy-demo/src/index.css` |
 | App styles | `ahoy-demo/src/App.css` |
+| Router entry point | `ahoy-demo/src/main.tsx` |
+| Route definitions | `ahoy-demo/src/App.tsx` |
+| Nav items + sidebar | `ahoy-demo/src/components/Sidebar.tsx` |
 | Color spec | `specs/foundations/color.md` |
 | Spacing spec | `specs/foundations/spacing.md` |
 | Typography spec | `specs/foundations/typography.md` |
