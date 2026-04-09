@@ -4,6 +4,7 @@ import './App.css';
 import { Button } from '@teamleader/ahoy/dist/es/components/button';
 import Sidebar, { type Page } from './components/Sidebar';
 import TopBar from './components/TopBar';
+import { GetStarted } from './components/GetStarted';
 
 function App() {
   const [page, setPage] = useState<Page>('Get started');
@@ -14,7 +15,13 @@ function App() {
       <div className="app-content">
         <TopBar notificationCount={3} />
         <main className="app-main">
-          <Button label="Click me" level="primary" />
+          {page === 'Get started' ? (
+            <GetStarted />
+          ) : (
+            <div className="app-main__center">
+              <Button label="Click me" level="primary" />
+            </div>
+          )}
         </main>
       </div>
     </div>

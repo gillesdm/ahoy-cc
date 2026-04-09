@@ -1,0 +1,636 @@
+/* GetStarted.css — Interactive onboarding page */
+
+.gs-page {
+  padding: var(--space-7) var(--space-9);
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-9);
+}
+
+/* ── Sections ── */
+.gs-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.gs-section--last {
+  padding-bottom: var(--space-9);
+}
+
+.gs-hero {
+  padding-top: var(--space-5);
+}
+
+/* ── Type scale ── */
+.gs-eyebrow {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+  letter-spacing: var(--letter-spacing-caps-wide);
+  text-transform: uppercase;
+}
+
+.gs-h1 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  line-height: var(--line-height-heading);
+  margin: 0;
+}
+
+.gs-h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.gs-h3 {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-caps);
+  margin: 0;
+}
+
+.gs-lead {
+  font-size: var(--font-size-base);
+  color: var(--color-text-subtle);
+  line-height: var(--line-height-loose);
+  margin: 0;
+  max-width: 600px;
+}
+
+.gs-body {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-subtle);
+  line-height: var(--line-height-loose);
+  margin: 0;
+}
+
+.gs-inline-code {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-sm);
+}
+
+/* ── Code block ── */
+.gs-code {
+  position: relative;
+  background: var(--color-nav-bg);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.gs-code__pre {
+  margin: 0;
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-loose);
+  color: var(--color-bg);
+  overflow-x: auto;
+  white-space: pre;
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+}
+
+.gs-code__copy {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-3);
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-subtle);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition-shadow);
+
+  &:hover {
+    box-shadow: var(--elevation-1);
+  }
+}
+
+/* ── Two-column grid ── */
+.gs-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+/* ── Cards ── */
+.gs-card {
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.gs-card--accent {
+  background: var(--color-accent-bg);
+  border-color: var(--color-accent);
+}
+
+.gs-card__path {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+}
+
+.gs-card__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.gs-card__body {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-subtle);
+  line-height: var(--line-height-loose);
+  margin: 0;
+}
+
+/* ── Token layers ── */
+.gs-layers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gs-layer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+}
+
+.gs-layer--accent {
+  border-color: var(--color-accent);
+  background: var(--color-accent-bg);
+}
+
+.gs-layer__num {
+  width: var(--space-6);
+  height: var(--space-6);
+  border-radius: var(--radius-round);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gs-layer__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.gs-layer__title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.gs-layer__desc {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+}
+
+/* ── Color swatches ── */
+.gs-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.gs-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  min-width: 90px;
+}
+
+.gs-swatch__color {
+  height: var(--space-8);
+  border-radius: var(--radius-md);
+}
+
+.gs-swatch__color--light {
+  border: 1px solid var(--color-border);
+}
+
+.gs-swatch__token {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+  word-break: break-all;
+}
+
+.gs-swatch__label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+}
+
+/* ── Spacing scale ── */
+.gs-spacing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.gs-spacing-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.gs-spacing-token {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-text);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.gs-spacing-bar {
+  height: var(--space-4);
+  background: var(--color-accent);
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+  transition: var(--transition-shadow);
+}
+
+.gs-spacing-px {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+}
+
+/* ── Typography scale ── */
+.gs-typescale {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.gs-type-row {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-4);
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--space-3);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.gs-type-token {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+  min-width: 140px;
+  flex-shrink: 0;
+}
+
+.gs-type-sample {
+  flex: 1;
+  color: var(--color-text);
+}
+
+.gs-type-px {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+}
+
+/* Font size utility classes — used only in the typography scale demo */
+.gs-fsize-xs   { font-size: var(--font-size-xs);   }
+.gs-fsize-sm   { font-size: var(--font-size-sm);   }
+.gs-fsize-base { font-size: var(--font-size-base); }
+.gs-fsize-lg   { font-size: var(--font-size-lg);   }
+.gs-fsize-xl   { font-size: var(--font-size-xl);   }
+
+/* ── Spec tiers ── */
+.gs-tiers {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.gs-tier {
+  padding: var(--space-4) var(--space-5);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  transition: var(--transition-shadow);
+
+  &:hover {
+    box-shadow: var(--elevation-1);
+    border-color: var(--color-accent);
+  }
+}
+
+.gs-tier__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gs-tier__name {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.gs-tier__count {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-accent);
+  background: var(--color-accent-bg);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-round);
+}
+
+.gs-tier__desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+  margin: 0;
+  line-height: var(--line-height-base);
+}
+
+.gs-tier__path {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+}
+
+/* ── Component demo ── */
+.gs-demo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+}
+
+.gs-demo__controls {
+  display: flex;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.gs-control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.gs-control__label {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+  font-weight: var(--font-weight-medium);
+}
+
+.gs-chips {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.gs-chip {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-round);
+  cursor: pointer;
+  transition: var(--transition-border);
+
+  &:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+}
+
+.gs-chip--on {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-bg);
+  font-weight: var(--font-weight-medium);
+
+  &:hover {
+    background: var(--color-accent-border);
+    border-color: var(--color-accent-border);
+    color: var(--color-bg);
+  }
+}
+
+.gs-demo__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-7);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+}
+
+/* ── Commands ── */
+.gs-commands {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.gs-command {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  transition: var(--transition-shadow);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--color-accent-bg);
+  }
+}
+
+.gs-command__cmd {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+  min-width: 280px;
+  flex-shrink: 0;
+}
+
+.gs-command__desc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-subtle);
+  line-height: var(--line-height-base);
+}
+
+/* ── Workflow steps ── */
+.gs-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.gs-step {
+  display: flex;
+  gap: var(--space-5);
+}
+
+.gs-step__num {
+  width: var(--space-7);
+  height: var(--space-7);
+  border-radius: var(--radius-round);
+  background: var(--color-accent);
+  color: var(--color-bg);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.gs-step__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+  padding-top: var(--space-2);
+}
+
+.gs-step__title {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+.gs-step__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-subtle);
+  line-height: var(--line-height-loose);
+  margin: 0;
+}
+
+/* ── Token quick reference table ── */
+.gs-token-table {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.gs-token-table__header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: var(--space-3) var(--space-5);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-subtle);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-caps);
+}
+
+.gs-token-table__row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  padding: var(--space-3) var(--space-5);
+  border-bottom: 1px solid var(--color-border);
+  align-items: center;
+  transition: var(--transition-shadow);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background: var(--color-accent-bg);
+  }
+}
+
+.gs-token-table__want {
+  font-size: var(--font-size-xs);
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+}
+
+.gs-token-table__use {
+  font-family: var(--font-family-base);
+  font-feature-settings: var(--font-feature-tabular);
+  font-size: var(--font-size-xs);
+  color: var(--color-accent);
+}
+
+/* ── Audit callout ── */
+.gs-audit-box {
+  padding: var(--space-5) var(--space-6);
+  background: var(--color-accent-bg);
+  border: 1px solid var(--color-accent);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.gs-audit-box__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-accent);
+}
+
+.gs-audit-box__desc {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-subtle);
+  line-height: var(--line-height-base);
+  margin: 0;
+}

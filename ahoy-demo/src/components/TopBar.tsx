@@ -6,11 +6,26 @@ import IconButton    from '@teamleader/ahoy/dist/es/components/iconButton';
 import Svg14X14AddOutline        from '@teamleader/ahoy/dist/es/assets/icons/components/14X14AddOutline';
 import Svg14X14SearchOutline     from '@teamleader/ahoy/dist/es/assets/icons/components/14X14SearchOutline';
 import Svg24X24BellOutline       from '@teamleader/ahoy/dist/es/assets/icons/components/24X24BellOutline';
-import Svg24X24ContactsFilled    from '@teamleader/ahoy/dist/es/assets/icons/components/24X24ContactsFilled';
+import Svg24X24UserAddOutline    from '@teamleader/ahoy/dist/es/assets/icons/components/24X24UserAddOutline';
 import Svg24X24GiftOutline       from '@teamleader/ahoy/dist/es/assets/icons/components/24X24GiftOutline';
-import Svg24X24HelpBadgedOutline from '@teamleader/ahoy/dist/es/assets/icons/components/24X24HelpBadgedOutline';
+import Svg24X24TimerOutline      from '@teamleader/ahoy/dist/es/assets/icons/components/24X24TimerOutline';
+
+function LogoMark() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      {/* Large triangle — left */}
+      <polygon points="3,18 16.04,18 9.52,6.82"     fill="#17BFC0" />
+      {/* Medium triangle — centre */}
+      <polygon points="10.48,17.18 17,17.18 13.74,6" fill="#0D9E9F" />
+      {/* Small triangle — right */}
+      <polygon points="18,17.15 21,17.15 19.5,6.86"  fill="#067374" />
+    </svg>
+  );
+}
 
 export type TopBarProps = {
+  /** Optional page heading displayed on the left (e.g. "Projects") */
+  heading?: string;
   /** Show or hide the purple "Upgrade now" marketing CTA */
   mktAction?: 'True' | 'False';
   /** Show a tab navigation row immediately below the top bar */
@@ -22,6 +37,7 @@ export type TopBarProps = {
 };
 
 function TopBar({
+  heading,
   mktAction = 'True',
   withTabs = 'False',
   notificationCount = 0,
@@ -36,6 +52,9 @@ function TopBar({
 
   return (
     <header className="top-bar">
+      <div className="top-bar__left">
+        {heading && <h1 className="top-bar__heading">{heading}</h1>}
+      </div>
       <div className="top-bar__right">
 
         {/* Actions: Search + Add */}
@@ -57,7 +76,7 @@ function TopBar({
         {/* Links: Icon buttons + Need help */}
         <div className="top-bar__links">
           <div className="top-bar__bell-wrapper">
-            <IconButton icon={<Svg24X24BellOutline />} size="small" />
+            <IconButton icon={<Svg24X24BellOutline />} />
             {notificationCount > 0 && (
               <span
                 className="top-bar__badge"
@@ -68,18 +87,20 @@ function TopBar({
               </span>
             )}
           </div>
-          <IconButton icon={<Svg24X24ContactsFilled />} size="small" />
-          <IconButton icon={<Svg24X24GiftOutline />} size="small" />
-          <Button icon={<Svg24X24HelpBadgedOutline />} label="Need help?" size="small" />
+          <IconButton icon={<Svg24X24UserAddOutline />} />
+          <IconButton icon={<Svg24X24GiftOutline />} />
         </div>
 
-        {/* Timer — native placeholder */}
+        {/* Timer */}
         <button className="top-bar__timer" type="button" aria-label="Start timer">
+          <Svg24X24TimerOutline aria-hidden="true" />
           00:00
         </button>
 
-        {/* Logo chip — placeholder until LogoMark component exists */}
-        <div className="top-bar__logo" role="img" aria-label="Teamleader" />
+        {/* Logo chip */}
+        <div className="top-bar__logo" role="img" aria-label="Teamleader">
+          <LogoMark />
+        </div>
 
         {/* Avatar — initials chip */}
         <div className="top-bar__avatar" aria-label={`Logged in as ${userName}`}>

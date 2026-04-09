@@ -55,7 +55,9 @@ cd ahoy-demo && npm install
 npm run dev
 ```
 
-Open [http://localhost:5173](http://localhost:5173), then in a second terminal:
+Open [http://localhost:5173](http://localhost:5173) — the **Get started** page in the sidebar is a live, interactive onboarding guide. It walks through the token system, spec tiers, component props, and Claude commands with real examples you can click and copy.
+
+Then in a second terminal:
 
 ```bash
 claude

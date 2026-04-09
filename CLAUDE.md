@@ -37,6 +37,8 @@ The project serves as a reference implementation for how Ahoy integrates with a 
 | Spacing | `var(--space-1)` … `var(--space-9)` (or project-specific `--space-*`) |
 | Font size | `var(--font-size-xs/sm/base/lg/xl)` |
 | Font weight | `var(--font-weight-regular/medium/semibold/bold)` |
+| Letter spacing (caps) | `var(--letter-spacing-caps)` or `var(--letter-spacing-caps-wide)` |
+| Tabular numerals | `font-feature-settings: var(--font-feature-tabular)` |
 | Border radius | `var(--radius-sm/md/lg/round)` |
 | Shadow | `var(--elevation-1)` … `var(--elevation-4)` |
 | Z-index | `var(--z-below/base/above/overlay/modal/toast)` |
