@@ -28,6 +28,15 @@ Master map of every CSS custom property defined in `ahoy-demo/src/tokens.css`.
 | `--color-success` | `--color-mint-dark` | `#008c8c` | Success state |
 | `--color-warning` | `--color-gold-dark` | `#ed9b00` | Warning state |
 
+### Navigation (Sidebar organism)
+
+| Variable | Value | Purpose |
+|----------|-------|---------|
+| `--color-nav-bg` | `#2a3b4d` | Sidebar background — Ahoy `--color-teal-dark` primitive; no generic semantic alias exists for inverted dark nav surfaces |
+| `--color-nav-item-hover` | `rgba(255,255,255,0.08)` | Nav item background on hover |
+| `--color-nav-item-active` | `rgba(255,255,255,0.15)` | Nav item background when active (current page) |
+| `--color-nav-item-active-hover` | `rgba(255,255,255,0.20)` | Nav item background when active and hovered |
+
 ### Legacy aliases (backward-compat, prefer `--color-*` above)
 
 | Variable | Maps to |

@@ -10,8 +10,10 @@ Fast lookup tables for specs, tokens, and commands.
 |---|---|
 | `npm run dev` | Start the live prototype at `http://localhost:5173` |
 | `node scripts/token-audit.js` | Check for raw values that should be tokens |
-| `/create-spec <name>` | Create a spec via guided Q&A interview |
 | `/figma-spec <figma-url>` | Create a spec from a Figma component |
+| `/create-spec <name>` | Create a spec via guided Q&A interview |
+| `/create-component-from-spec <spec>` | Scaffold a React component from an existing spec |
+| `/spec-lookup <description>` | Surface relevant specs before building |
 | `claude` | Open Claude Code in the current directory |
 
 ---

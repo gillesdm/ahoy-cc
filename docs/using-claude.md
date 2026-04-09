@@ -147,6 +147,27 @@ Before building it, show me two or three approaches for the navigation layout.
 
 ---
 
+## Slash commands for common workflows
+
+These commands shortcut the most common tasks. Type them directly into Claude Code.
+
+| Command | What it does |
+|---|---|
+| `/spec-lookup <description>` | Before building, surfaces the specs, tokens, and Ahoy components that apply. Claude runs this automatically — you can also trigger it manually for a quick briefing. |
+| `/figma-spec <url>` | Reads a Figma component and writes a spec file. Claude shows a plan and waits for your approval before writing anything. |
+| `/create-spec <name>` | Walks you through a short Q&A and writes a spec from your answers. No Figma required. |
+| `/create-component-from-spec <spec>` | Scaffolds the full React component from an existing spec — correct imports, token-based CSS, all states. Claude confirms the plan before writing. |
+
+**Example flow — new component end to end:**
+
+```
+1. /figma-spec https://www.figma.com/design/...   ← write the spec from Figma
+2. /create-component-from-spec specs/organisms/notification-banner.md  ← scaffold the component
+3. Ask Claude to wire it into the page and iterate from there
+```
+
+---
+
 ## What Claude won't do
 
 - Use raw hex colours (`#00b2b2`) — it uses `var(--color-accent)` instead

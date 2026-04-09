@@ -63,8 +63,8 @@ Get started · Calendar · Companies · Contacts · Deals · Quotations · Proje
 | Font weight | `var(--font-weight-medium)` |
 | Line height | `var(--line-height-tight)` |
 | Item hover background | `var(--color-nav-item-hover)` |
-| Item active background | `var(--color-nav-item-active)` |
-| Item active+hover background | `var(--color-nav-item-active-hover)` |
+| Item active background | `var(--color-nav-item-active)` = `var(--color-accent)` — full teal fill |
+| Item active+hover background | `var(--color-nav-item-active-hover)` = `var(--color-accent-border)` — darker mint |
 
 Non-tokenised structural values:
 
@@ -111,9 +111,44 @@ type Page =
 | State | Visual |
 |-------|--------|
 | Default | All items rendered at equal visual weight on the dark navy background |
-| Active item | The item matching the current `page` value receives `var(--color-nav-item-active)` background |
+| Active item | The item matching the current `page` value receives a full teal fill (`var(--color-nav-item-active)` = `var(--color-accent)`, `#00b2b2`) — the same hue as the logo mark |
 | Hover (item) | Individual `SidebarMenuItem` background changes to `var(--color-nav-item-hover)` |
-| Active + hover | Active item on hover uses `var(--color-nav-item-active-hover)` |
+| Active + hover | Active item on hover darkens to `var(--color-nav-item-active-hover)` = `var(--color-accent-border)` (`#008c8c`) |
+
+## Icons
+
+**Rule:** All nav item icons **must** come from the `@teamleader/ahoy` npm package. Custom SVGs, external icon libraries, or image assets (e.g. Figma URL exports) are not permitted unless explicitly agreed with the design team.
+
+**Import pattern** — direct import, not the barrel export:
+
+```ts
+import Svg24X24CalendarFilled from '@teamleader/ahoy/dist/es/assets/icons/components/24X24CalendarFilled';
+```
+
+**Variant:** Use the `Filled` variant for all sidebar nav items. The icon SVG uses `fill: currentColor`, so it inherits white from the parent button's `color: var(--color-surface)` — no extra color prop needed.
+
+**Icon mapping:**
+
+| Nav item | Ahoy icon component |
+|----------|---------------------|
+| Get started | `24X24RocketFilled` |
+| Calendar | `24X24CalendarFilled` |
+| Companies | `24X24BuildingFilled` |
+| Contacts | `24X24ContactsFilled` |
+| Deals | `24X24HandshakeFilled` |
+| Quotations | `24X24InvoiceFilled` |
+| Projects | `24X24ProjectsFilled` |
+| Planning | `24X24ScheduleFilled` |
+| Revenue | `24X24MoneyFilled` |
+| Expenses | `24X24ExpensesFilled` |
+| Work Orders | `24X24WorkorderFilled` |
+| Tickets | `24X24TicketFilled` |
+| Products | `24X24ProductsFilled` |
+| Timesheets | `24X24TimerFilled` |
+| Insights | `24X24StatsFilled` |
+| Settings | `24X24SettingsFilled` |
+
+---
 
 ## Code Example
 
