@@ -93,49 +93,79 @@ The shell layout (sidebar + top bar + content area) follows [specs/patterns/layo
 
 ## FAQ
 
-**The browser shows a blank page.**
+<details>
+<summary><strong>The browser shows a blank page.</strong></summary>
+
 Make sure Terminal 1 is running `npm run dev` inside the `ahoy-demo/` folder. If the terminal shows an error, check that Node.js v18+ is installed: `node --version`.
+</details>
 
-**Port 5173 is already in use.**
+<details>
+<summary><strong>Port 5173 is already in use.</strong></summary>
+
 Another instance of the dev server is running. Close it first, or start on a different port: `npm run dev -- --port 5174`.
+</details>
 
-**Claude says it can't find a component or spec.**
+<details>
+<summary><strong>Claude says it can't find a component or spec.</strong></summary>
+
 The spec might not exist yet. Use `/figma-spec <url>` if you have a Figma link, or `/create-spec <name>` for a guided Q&A. Then try your original request again.
+</details>
 
-**The page didn't update after Claude made a change.**
+<details>
+<summary><strong>The page didn't update after Claude made a change.</strong></summary>
+
 The browser should update automatically (hot reload). If it doesn't, do a hard refresh (`Cmd+Shift+R` on Mac). If the dev server stopped, restart it in Terminal 1.
+</details>
 
-**The token audit is failing.**
+<details>
+<summary><strong>The token audit is failing.</strong></summary>
+
 Ask Claude directly:
 ```
 Run the token audit and fix any violations you find.
 ```
 Claude will read the error output and patch the offending values.
+</details>
 
-**Claude's output doesn't match the Figma design.**
+<details>
+<summary><strong>Claude's output doesn't match the Figma design.</strong></summary>
+
 Point Claude at the spec file explicitly:
 ```
 Re-read specs/organisms/top-bar.md and check if the layout matches the Anatomy section.
 ```
 Or re-run `/figma-spec` with the same URL — Claude will offer to update the existing spec rather than create a duplicate.
+</details>
 
-**`npm install` failed.**
+<details>
+<summary><strong>`npm install` failed.</strong></summary>
+
 Make sure you are inside the `ahoy-demo/` folder, not the project root. If errors mention Node.js version, run `node --version` — v18 or higher is required.
+</details>
 
-**Claude keeps using the wrong component or tokens.**
+<details>
+<summary><strong>Claude keeps using the wrong component or tokens.</strong></summary>
+
 Reference the spec file directly in your message:
 ```
 Following specs/atoms/button.md, add a disabled primary button below the form.
 ```
+</details>
 
-**I created a new spec but Claude doesn't seem to use it.**
+<details>
+<summary><strong>I created a new spec but Claude doesn't seem to use it.</strong></summary>
+
 Specs are read on demand — no restart needed. Just ask Claude to use it by name or path:
 ```
 Build the notification banner from specs/organisms/notification-banner.md.
 ```
+</details>
 
-**How do I know the prototype is ready to hand off?**
+<details>
+<summary><strong>How do I know the prototype is ready to hand off?</strong></summary>
+
 Run `node scripts/token-audit.js` — it must exit with zero violations. Check that every component you've added has a spec file in `specs/`. Then share `ahoy-demo/src/` and `specs/` with the developer. See [docs/handoff.md](docs/handoff.md) for the full checklist.
+</details>
 
 ---
 
