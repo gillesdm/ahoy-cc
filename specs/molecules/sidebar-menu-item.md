@@ -57,8 +57,9 @@ Non-tokenised structural values:
 | State | Visual |
 |-------|--------|
 | Default | Icon + label on the sidebar's dark navy background; no highlight |
-| Hover | Background tint applied by the Sidebar root (see `Sidebar` for hover token) |
-| Active / Selected | Highlighted background indicating the current page; managed by `Sidebar` via `page` prop |
+| Hover | Subtle white tint (`var(--color-nav-item-hover)`) applied by the Sidebar root |
+| Active / Selected | Full teal fill (`var(--color-nav-item-active)` = `var(--color-accent)`, `#00b2b2`) — same hue as the logo mark; managed by `Sidebar` via `page` prop |
+| Active + hover | Darkens to `var(--color-nav-item-active-hover)` = `var(--color-accent-border)` (`#008c8c`) |
 
 ## Code Example
 
@@ -77,7 +78,7 @@ Non-tokenised structural values:
 - [Color](../foundations/color.md) — `--color-surface` for white text on the inverted dark background
 - [Spacing](../foundations/spacing.md) — `--space-4` (12px) for uniform item padding
 - [Typography](../foundations/typography.md) — `--font-size-xs`, `--font-weight-medium`, `--line-height-tight`
-- [Icon](../components/icon.md) — 24×24 SVG icon rendered above the label
+- Icons — 24×24 `Filled` components from `@teamleader/ahoy/dist/es/assets/icons/components/`; render white via `fill: currentColor` inheriting `color: var(--color-surface)` from the parent button
 
 ## Used by
 

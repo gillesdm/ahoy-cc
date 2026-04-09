@@ -22,16 +22,16 @@
 ```
 ┌───────────────────┐
 │   ┌───────────┐   │
-│   │ Logo Mark │   │  ← 54×54 teal rounded square, 18px from top
+│   │ Logo Mark │   │  ← 54×54 teal rounded square with Teamleader icon, 18px from top
 │   └───────────┘   │
 │                   │
 │   ┌───────────┐   │
 │   │  [Icon]   │   │
-│   │ Get start │   │  ← SidebarMenuItem
+│   │ Get start │   │  ← SidebarMenuItem (default active)
 │   └───────────┘   │
 │   ┌───────────┐   │
 │   │  [Icon]   │   │
-│   │ Calendar  │   │  ← SidebarMenuItem (active state shown via `page` prop)
+│   │ Calendar  │   │  ← SidebarMenuItem
 │   └───────────┘   │
 │        …          │
 │   ┌───────────┐   │
@@ -43,7 +43,7 @@
 ```
 
 1. **Root** — Fixed-width (`144px`), full-height column. Dark navy background. `overflow: hidden`.
-2. **Logo Mark** — 54×54 teal rounded square (`--radius-md`), centered horizontally, `18px` from the top. Contains the Teamleader brand icon.
+2. **Logo Mark** — 54×54 teal rounded square (`--radius-md`), centered horizontally, `18px` from the top. Contains the Teamleader brand icon (white arrow mark, 39×27px).
 3. **Menu List** — Vertical stack of [`SidebarMenuItem`](../molecules/sidebar-menu-item.md) instances starting at `84px` from the top. No dividers between items.
 4. **SidebarMenuItem** — Each item: 24×24 icon stacked above a short label. See [SidebarMenuItem](../molecules/sidebar-menu-item.md).
 
@@ -54,6 +54,7 @@ Get started · Calendar · Companies · Contacts · Deals · Quotations · Proje
 
 | Role | Token |
 |------|-------|
+| Sidebar background | `var(--color-nav-bg)` |
 | Logo background | `var(--color-accent)` |
 | Logo border radius | `var(--radius-md)` |
 | Menu item text | `var(--color-surface)` |
@@ -61,76 +62,128 @@ Get started · Calendar · Companies · Contacts · Deals · Quotations · Proje
 | Font size | `var(--font-size-xs)` |
 | Font weight | `var(--font-weight-medium)` |
 | Line height | `var(--line-height-tight)` |
+| Item hover background | `var(--color-nav-item-hover)` |
+| Item active background | `var(--color-nav-item-active)` = `var(--color-accent)` — full teal fill |
+| Item active+hover background | `var(--color-nav-item-active-hover)` = `var(--color-accent-border)` — darker mint |
 
 Non-tokenised structural values:
 
 | Property | Value | Reason |
 |----------|-------|--------|
-| Sidebar background | `#2a3b4d` | Ahoy Layer 1 primitive `--color-teal-dark`; no Layer 2 semantic nav/surface token exists for inverted dark backgrounds |
 | Sidebar width | `144px` | Fixed application shell dimension; not a reusable spacing decision |
 | Logo size | `54×54px` | Brand-specific logo mark dimensions |
-| Logo top offset | `18px` | Brand-specific positioning within the sidebar shell |
+| Logo icon size | `39×27px` | Brand-specific Teamleader arrow mark |
+| Logo top offset | `18px` (`--space-5`) | Brand-specific positioning within the sidebar shell |
 | Menu list top offset | `84px` | Distance from top of sidebar to first menu item; derived from logo height + offset |
+| Icon-to-label gap | `3px` (`--space-1`) | Compact tight gap specific to this stacked layout |
 
 ## Props / API
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `page` | `"Dashboard" \| "Calendar" \| "Get started"` | `"Dashboard"` | Controls which menu item renders in the active state |
+| `page` | `Page` | `"Get started"` | Controls which menu item renders in the active state |
+| `onNavigate` | `(page: Page) => void` | `undefined` | Callback fired when the user clicks a nav item |
 | `className` | `string` | `undefined` | Optional override for the root element's class |
+
+Where `Page` is:
+```ts
+type Page =
+  | 'Get started'
+  | 'Calendar'
+  | 'Companies'
+  | 'Contacts'
+  | 'Deals'
+  | 'Quotations'
+  | 'Projects'
+  | 'Planning'
+  | 'Revenue'
+  | 'Expenses'
+  | 'Work Orders'
+  | 'Tickets'
+  | 'Products'
+  | 'Timesheets'
+  | 'Insights'
+  | 'Settings';
+```
 
 ## States
 
 | State | Visual |
 |-------|--------|
 | Default | All items rendered at equal visual weight on the dark navy background |
-| Active item | The item matching the current `page` value receives a highlighted background treatment |
-| Hover (item) | Individual `SidebarMenuItem` background lightens on pointer hover |
+| Active item | The item matching the current `page` value receives a full teal fill (`var(--color-nav-item-active)` = `var(--color-accent)`, `#00b2b2`) — the same hue as the logo mark |
+| Hover (item) | Individual `SidebarMenuItem` background changes to `var(--color-nav-item-hover)` |
+| Active + hover | Active item on hover darkens to `var(--color-nav-item-active-hover)` = `var(--color-accent-border)` (`#008c8c`) |
+
+## Icons
+
+**Rule:** All nav item icons **must** come from the `@teamleader/ahoy` npm package. Custom SVGs, external icon libraries, or image assets (e.g. Figma URL exports) are not permitted unless explicitly agreed with the design team.
+
+**Import pattern** — direct import, not the barrel export:
+
+```ts
+import Svg24X24CalendarFilled from '@teamleader/ahoy/dist/es/assets/icons/components/24X24CalendarFilled';
+```
+
+**Variant:** Use the `Filled` variant for all sidebar nav items. The icon SVG uses `fill: currentColor`, so it inherits white from the parent button's `color: var(--color-surface)` — no extra color prop needed.
+
+**Icon mapping:**
+
+| Nav item | Ahoy icon component |
+|----------|---------------------|
+| Get started | `24X24RocketFilled` |
+| Calendar | `24X24CalendarFilled` |
+| Companies | `24X24BuildingFilled` |
+| Contacts | `24X24ContactsFilled` |
+| Deals | `24X24HandshakeFilled` |
+| Quotations | `24X24InvoiceFilled` |
+| Projects | `24X24ProjectsFilled` |
+| Planning | `24X24ScheduleFilled` |
+| Revenue | `24X24MoneyFilled` |
+| Expenses | `24X24ExpensesFilled` |
+| Work Orders | `24X24WorkorderFilled` |
+| Tickets | `24X24TicketFilled` |
+| Products | `24X24ProductsFilled` |
+| Timesheets | `24X24TimerFilled` |
+| Insights | `24X24StatsFilled` |
+| Settings | `24X24SettingsFilled` |
+
+---
 
 ## Code Example
 
 ```tsx
 // Sidebar is a custom organism — not an Ahoy import.
-// Compose it from SidebarMenuItem instances:
+// Icons come from @teamleader/ahoy icon components (fill: currentColor — inherits white from CSS).
 
-type SidebarProps = {
-  page?: "Dashboard" | "Calendar" | "Get started";
-};
+import Sidebar, { type Page } from './components/Sidebar';
 
-function Sidebar({ page = "Dashboard" }: SidebarProps) {
+// Icons are imported directly inside Sidebar.tsx, e.g.:
+// import Svg24X24CalendarFilled from '@teamleader/ahoy/dist/es/assets/icons/components/24X24CalendarFilled';
+// Use the Filled variant for all nav items. Icons render white via CSS color: var(--color-surface).
+
+function App() {
+  const [page, setPage] = useState<Page>('Get started');
+
   return (
-    <nav className="sidebar">
-      <div className="sidebar__logo">
-        <img src={teamleaderLogoUrl} alt="Teamleader" />
-      </div>
-      <ul className="sidebar__menu">
-        {NAV_ITEMS.map((item) => (
-          <li key={item.label}>
-            <a
-              className={`sidebar-menu-item${page === item.page ? " sidebar-menu-item--active" : ""}`}
-              href={item.href}
-              aria-current={page === item.page ? "page" : undefined}
-            >
-              <img src={item.icon} alt="" width={24} height={24} />
-              <span className="sidebar-menu-item__label">{item.label}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <div className="app-shell">
+      <Sidebar page={page} onNavigate={setPage} />
+      <main className="app-main">
+        {/* page content */}
+      </main>
+    </div>
   );
 }
 ```
 
 ## Uses
 
-- [Color](../foundations/color.md) — `--color-accent` for the logo mark; `--color-surface` for inverted text
-- [Spacing](../foundations/spacing.md) — `--space-4` (12px) for menu item padding
+- [Color](../foundations/color.md) — `--color-nav-bg` for sidebar background; `--color-accent` for logo mark; `--color-surface` for inverted text; `--color-nav-item-hover/active/active-hover` for interaction states
+- [Spacing](../foundations/spacing.md) — `--space-4` (12px) for menu item padding; `--space-5` (18px) for logo top offset
 - [Typography](../foundations/typography.md) — `--font-size-xs`, `--font-weight-medium`, `--line-height-tight`
 - [Radius](../foundations/radius.md) — `--radius-md` for the logo mark corners
-- [Icon](../components/icon.md) — 24×24 SVG icons within each menu item
 - [SidebarMenuItem](../molecules/sidebar-menu-item.md) — each navigation destination in the menu list
 
 ## Used by
 
-_No known usages yet. This organism is the top-level navigation shell._
+- [Layout](../patterns/layout.md) — Sidebar is the left column of the app shell

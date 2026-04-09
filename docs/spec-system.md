@@ -112,18 +112,18 @@ Each spec file follows the same structure so Claude always knows where to look:
 
 If Claude can't find a spec for what you're building, you have three options:
 
-**Option 1 — Interview-based spec (no Figma needed)**
-Use `/create-spec` to walk through a short Q&A. Claude asks about the component's purpose, anatomy, states, and props — then writes the spec from your answers. Category and filename are inferred automatically; you confirm before anything is written.
-
-```
-/create-spec NotificationBadge
-```
-
-**Option 2 — Generate it from Figma**
+**Option 1 — Generate it from Figma**
 If the component exists in Figma, use `/figma-spec` to generate the spec directly from the design. See [Figma Integration](./figma.md).
 
 ```
 /figma-spec https://www.figma.com/design/...
+```
+
+**Option 2 — Interview-based spec (no Figma needed)**
+Use `/create-spec` to walk through a short Q&A. Claude asks about the component's purpose, anatomy, states, and props — then writes the spec from your answers. Category and filename are inferred automatically; you confirm before anything is written.
+
+```
+/create-spec NotificationBadge
 ```
 
 **Option 3 — Ask Claude to infer from the closest spec**
@@ -136,3 +136,21 @@ Claude will flag any assumptions it makes so you can review them.
 
 > [!TIP]
 > When you add a new spec, update `specs/usage.md` with a one-line entry so it stays discoverable.
+
+---
+
+## From spec to working component
+
+Once a spec file exists, use `/create-component-from-spec` to scaffold the React component automatically:
+
+```
+/create-component-from-spec specs/organisms/notification-banner.md
+```
+
+Claude will:
+1. Read the spec and resolve all sub-component dependencies
+2. Show you a plan — which files it will create, which Ahoy components it will import, which tokens it will use
+3. Wait for your approval before writing anything
+4. Run the token audit automatically and fix any violations before finishing
+
+This works for any spec in any category. The output files go into `ahoy-demo/src/components/` and are ready to use immediately.

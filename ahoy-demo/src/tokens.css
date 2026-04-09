@@ -106,6 +106,13 @@
   --color-success:        var(--color-mint-dark,      #008c8c);
   --color-warning:        var(--color-gold-dark,      #ed9b00);
 
+  /* ---- Navigation (sidebar organism) ---- */
+  /* #2a3b4d = Ahoy Layer 1 --color-teal-dark; no semantic alias exists for inverted nav */
+  --color-nav-bg:                #2a3b4d;
+  --color-nav-item-hover:        rgba(255, 255, 255, 0.08);
+  --color-nav-item-active:       var(--color-accent);          /* #00b2b2 — Figma: full teal fill on active item */
+  --color-nav-item-active-hover: var(--color-accent-border);   /* #008c8c — darker mint on hover over active */
+
   /* Legacy variable names used in App.css (mapped to semantic tokens above) */
   --accent:               var(--color-accent);
   --accent-bg:            var(--color-accent-bg);
