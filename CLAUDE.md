@@ -5,6 +5,12 @@
 Vite + React 18 + TypeScript demo app using the `@teamleader/ahoy` design system (v3.x).
 The project serves as a reference implementation for how Ahoy integrates with a Vite app.
 
+The key ideas:
+- **Specs first** — every component is documented in `specs/` before code is written
+- **Tokens everywhere** — all colors, sizes, and spacing come from named CSS variables in `tokens.css`
+- **Commands** — Claude Code slash commands handle the entire workflow, from Figma → spec → component → page
+- **15 routes** — the app shell has 15 pre-wired pages in the sidebar, ready to fill in
+
 ## Stack
 
 - **Framework:** React 18, TypeScript
@@ -13,7 +19,7 @@ The project serves as a reference implementation for how Ahoy integrates with a 
 - **Design System:** `@teamleader/ahoy` v3.4.0
 - **Styling:** CSS custom properties (no CSS modules, no Tailwind)
 
-## AI Coding Instructions
+## Guidelines
 
 > Before writing or modifying any UI code, read the relevant spec file in `specs/`.
 > Use only tokens from `ahoy-demo/src/tokens.css`. Run the token audit script before
@@ -28,6 +34,8 @@ The project serves as a reference implementation for how Ahoy integrates with a 
 5. Commit only when audit passes
 
 ### Token rules
+
+Design tokens are named CSS variables. Use them for every visual value — never hardcode.
 
 | What you want | Use this |
 |---------------|----------|
@@ -65,6 +73,11 @@ import { Button } from '@teamleader/ahoy/dist/es/components/button';
 import { Button } from '@teamleader/ahoy';
 ```
 
+Icon imports follow the same pattern:
+```tsx
+import SvgRocketFilled from '@teamleader/ahoy/dist/es/assets/icons/components/RocketFilled';
+```
+
 ### CSS import order in main.tsx
 
 ```tsx
@@ -72,6 +85,10 @@ import './index.css'
 import '@teamleader/ahoy/dist/es/index.css'
 import './tokens.css'    // Must come after ahoy CSS
 ```
+
+### DataGrid
+
+`@tanstack/react-table` is **not installed**. Do not use the `DataGrid` component. Render tabular data as plain `<table>` HTML with token-based CSS classes.
 
 ## Adding a new page
 
@@ -121,6 +138,8 @@ All commands live in `.claude/commands/` and are available as slash commands in 
 
 ### Setup
 
+Run `/get-started` once when setting up a fresh environment. It installs the Figma and/or Playwright integrations interactively.
+
 | Command | Description |
 |---------|-------------|
 | `/get-started` | Interactive wizard — install Figma MCP and/or Playwright MCP in one step |
@@ -129,18 +148,28 @@ All commands live in `.claude/commands/` and are available as slash commands in 
 
 ### Specs
 
-| Command | Argument | Description |
-|---------|----------|-------------|
-| `/create-spec [name]` | Component name | Create a new design spec through a guided interview |
-| `/figma-spec [url]` | Figma URL | Generate a spec file from a Figma design |
-| `/spec-lookup [description]` | Feature/component description | Look up relevant specs before building UI |
+Use these to create or find spec files before building UI.
+
+| Command | When to use | Argument |
+|---------|------------|---------|
+| `/figma-spec [url]` | You have a Figma design — Claude reads it and writes the spec | Figma URL |
+| `/create-spec [name]` | No Figma file — Claude interviews you and writes the spec | Component name |
+| `/spec-lookup [description]` | Before building — find which existing specs apply | Plain description |
 
 ### Development
 
-| Command | Argument | Description |
-|---------|----------|-------------|
-| `/create-component-from-spec [spec]` | Spec path or component name | Generate a React component from a spec, wiring Ahoy imports automatically |
-| `/playwright-import "URL" ["action"]` | URL + optional action | Scrape a page with Playwright, map it to Ahoy components, generate a full prototype page |
+Use these to generate code from specs or real pages.
+
+| Command | When to use | Argument |
+|---------|------------|---------|
+| `/create-component-from-spec [spec]` | You have a spec and want to generate the React component | Spec path or component name |
+| `/playwright-import "URL" ["action"]` | You want to prototype an existing page — Claude opens it in a browser, maps it to Ahoy components, and generates the page file | URL + optional action |
+
+**playwright-import example:**
+```
+/playwright-import "https://example.com/deals" "click on the Deals tab"
+```
+The optional action lets you navigate to a specific state before scraping (e.g. open a modal, switch a tab).
 
 ## File Map
 
@@ -152,24 +181,11 @@ All commands live in `.claude/commands/` and are available as slash commands in 
 | Router entry point | `ahoy-demo/src/main.tsx` |
 | Route definitions | `ahoy-demo/src/App.tsx` |
 | Nav items + sidebar | `ahoy-demo/src/components/Sidebar.tsx` |
-| Color spec | `specs/foundations/color.md` |
-| Spacing spec | `specs/foundations/spacing.md` |
-| Typography spec | `specs/foundations/typography.md` |
-| Border radius spec | `specs/foundations/radius.md` |
-| Elevation spec | `specs/foundations/elevation.md` |
-| Motion spec | `specs/foundations/motion.md` |
-| Master token reference | `specs/tokens/token-reference.md` |
-| Button atom spec | `specs/atoms/button.md` |
-| Input atom spec | `specs/atoms/input.md` |
-| IconButton atom spec | `specs/atoms/icon-button.md` |
-| Counter molecule spec | `specs/molecules/counter.md` |
-| Hero molecule spec | `specs/molecules/hero.md` |
-| SidebarMenuItem molecule spec | `specs/molecules/sidebar-menu-item.md` |
-| Next Steps organism spec | `specs/organisms/next-steps.md` |
-| Sidebar organism spec | `specs/organisms/sidebar.md` |
-| Layout patterns spec | `specs/patterns/layout.md` |
-| All atom specs | `specs/atoms/` |
-| All molecule specs | `specs/molecules/` |
-| All organism specs | `specs/organisms/` |
-| All pattern specs | `specs/patterns/` |
+| Foundation specs | `specs/foundations/` — color, spacing, typography, radius, elevation, motion |
+| Atom specs | `specs/atoms/` — 35+ single-responsibility components |
+| Molecule specs | `specs/molecules/` — 25+ composite components |
+| Organism specs | `specs/organisms/` — 15+ full-page-level components |
+| Pattern specs | `specs/patterns/` — layout, flex, grid, island, … |
+| Token reference | `specs/tokens/token-reference.md` |
 | Token audit script | `scripts/token-audit.js` |
+| Claude commands | `.claude/commands/` |
