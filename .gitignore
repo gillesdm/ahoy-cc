@@ -3,3 +3,4 @@
 .DS_Store
 /state
 .playwright-mcp
+visual-match-*

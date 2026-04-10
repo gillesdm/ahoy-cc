@@ -157,6 +157,8 @@ These commands shortcut the most common tasks. Type them directly into Claude Co
 | `/figma-spec <url>` | Reads a Figma component and writes a spec file. Claude shows a plan and waits for your approval before writing anything. |
 | `/create-spec <name>` | Walks you through a short Q&A and writes a spec from your answers. No Figma required. |
 | `/create-component-from-spec <spec>` | Scaffolds the full React component from an existing spec — correct imports, token-based CSS, all states. Claude confirms the plan before writing. |
+| `/playwright-import "URL" ["action"]` | Opens a real page in a browser, maps its content to Ahoy components, generates a full prototype page, then automatically runs the visual match loop to refine it against the original. |
+| `/visual-match "URL" "http://localhost:5173/route" "PageName"` | Compares a generated page against a reference URL using Playwright screenshots and iteratively applies targeted fixes until the designs converge. Runs automatically after `/playwright-import` — invoke standalone to re-run. |
 
 **Example flow — new component end to end:**
 
@@ -165,6 +167,30 @@ These commands shortcut the most common tasks. Type them directly into Claude Co
 2. /create-component-from-spec specs/organisms/notification-banner.md  ← scaffold the component
 3. Ask Claude to wire it into the page and iterate from there
 ```
+
+**Example flow — import a live page:**
+
+```
+1. /playwright-import "https://app.example.com/deals"   ← Claude opens the page, maps components, generates the page
+   └── visual-match runs automatically (up to 5 iterations of screenshot comparison + fixes)
+2. If differences remain, re-run directly:
+   /visual-match "https://app.example.com/deals" "http://localhost:5173/deals" "Deals"
+```
+
+---
+
+## How the visual match loop works
+
+When you use `/playwright-import`, Claude doesn't just generate the page and stop — it then runs a comparison loop to get as close to the original as possible.
+
+Each iteration:
+1. **Screenshots both pages** at the same viewport (1280 × 900)
+2. **Scores every difference** across six categories: layout, spacing, typography, colour, component choices, and content shape
+3. **Applies targeted fixes** — CSS only in early iterations, then Ahoy prop changes and layout adjustments if needed
+4. **Re-runs the token audit** to ensure no raw values slipped in
+5. **Continues or stops** — the loop exits when no critical or medium differences remain, after 5 iterations, or when it detects a plateau
+
+At the end, Claude reports the outcome (success, cap reached, or plateau) and lists any remaining differences that require manual attention — for example, OS-level font rendering or Ahoy component variants that don't support a particular design detail.
 
 ---
 

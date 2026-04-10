@@ -110,7 +110,8 @@ The shell layout (sidebar + top bar + content area) follows [specs/patterns/layo
 | Command | What it does |
 |---|---|
 | `/create-component-from-spec <spec>` | Scaffold a React component from an existing spec |
-| `/playwright-import "URL" ["action"]` | Open a real page in a browser, map it to Ahoy components, generate a prototype page |
+| `/playwright-import "URL" ["action"]` | Open a real page in a browser, map it to Ahoy components, generate a prototype page — then automatically runs the visual match loop to refine it |
+| `/visual-match "URL" "http://localhost:5173/route" "PageName"` | Compare a generated page against a reference URL and iteratively fix visual differences — runs automatically after `/playwright-import`, or invoke standalone |
 
 ---
 
@@ -158,6 +159,18 @@ Point Claude at the spec file explicitly:
 Re-read specs/organisms/top-bar.md and check if the layout matches the Anatomy section.
 ```
 Or re-run `/figma-spec` with the same URL — Claude will offer to update the existing spec rather than create a duplicate.
+</details>
+
+<details>
+<summary><strong>The imported page doesn't look like the original.</strong></summary>
+
+`/playwright-import` automatically runs a visual match loop after generating the page — up to 5 iterations of screenshot comparison and targeted fixes. If differences remain, invoke the loop again directly:
+
+```
+/visual-match "https://original-url.com/page" "http://localhost:5173/route" "PageName"
+```
+
+The skill compares screenshots side-by-side, scores each difference by severity (critical / medium / low), applies targeted CSS and layout fixes, then repeats until the designs converge or it reports what remains and why.
 </details>
 
 <details>

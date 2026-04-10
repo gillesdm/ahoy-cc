@@ -14,6 +14,8 @@ Fast lookup tables for specs, tokens, and commands.
 | `/create-spec <name>` | Create a spec via guided Q&A interview |
 | `/create-component-from-spec <spec>` | Scaffold a React component from an existing spec |
 | `/spec-lookup <description>` | Surface relevant specs before building |
+| `/playwright-import "URL" ["action"]` | Import a real page — generates the prototype page and auto-runs visual matching |
+| `/visual-match "URL" "http://localhost:5173/route" "PageName"` | Compare and iteratively fix a generated page against its reference URL (up to 5 iterations) |
 | `claude` | Open Claude Code in the current directory |
 
 ---

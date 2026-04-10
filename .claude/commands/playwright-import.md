@@ -296,6 +296,25 @@ If errors appear: fix the TypeScript issues in the generated files (wrong prop t
 
 ---
 
+## Step 5 — Visual match loop
+
+Once the token audit and TypeScript check both pass, invoke the `visual-match` skill to iteratively compare the generated page against the original and fix visual discrepancies.
+
+Use the `Skill` tool:
+- **skill**: `visual-match`
+- **args**: `"{sourceUrl}" "http://localhost:5173{routePath}" "{pageName}"`
+
+Where:
+- `{sourceUrl}` — the original URL parsed from `$ARGUMENTS` in Step 1
+- `{routePath}` — the route path determined in Step 2d (e.g. `/deals`)
+- `{pageName}` — the PascalCase page name from Step 2d (e.g. `Deals`)
+
+The skill will run up to 5 visual comparison iterations, applying targeted CSS and TSX fixes each time, until the local page matches the reference design or no further improvement is possible.
+
+Do not proceed to the completion checklist until the skill reports its final outcome.
+
+---
+
 ## Completion checklist
 
 Before reporting done, confirm every item:
@@ -316,3 +335,5 @@ Before reporting done, confirm every item:
 - [ ] `Sidebar.tsx` updated or confirmed no change needed
 - [ ] `node scripts/token-audit.js` exits 0
 - [ ] `npx tsc --noEmit` exits 0
+- [ ] `visual-match` skill invoked with reference URL, local URL, and page name
+- [ ] Visual match loop completed — outcome reported (SUCCESS / CAP REACHED / PLATEAU)
