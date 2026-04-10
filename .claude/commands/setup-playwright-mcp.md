@@ -1,22 +1,34 @@
 ---
-description: Install the Playwright MCP server into Claude Code (adds to ~/.claude/settings.json)
+description: Install the Playwright MCP server into Claude Code (adds to ~/.claude.json)
 allowed-tools: Bash
 ---
 
-Add the Playwright MCP server to `~/.claude/settings.json` if it isn't already there.
+Add the Playwright MCP server to `~/.claude.json` (the file Claude Code actually reads for MCP servers).
 
 ```bash
-node -e "
-const fs=require('fs'),h=require('os').homedir(),p=h+'/.claude/settings.json';
-const s=JSON.parse(fs.readFileSync(p,'utf8'));
-s.mcpServers=s.mcpServers||{};
-if(s.mcpServers.playwright){process.stdout.write('already_installed');}
-else{s.mcpServers.playwright={command:'npx',args:['-y','@playwright/mcp@latest']};fs.writeFileSync(p,JSON.stringify(s,null,2));process.stdout.write('installed');}
+python3 -c "
+import json, os
+path = os.path.expanduser('~/.claude.json')
+with open(path) as f:
+    d = json.load(f)
+d.setdefault('mcpServers', {})
+if 'playwright' in d['mcpServers']:
+    print('already_installed')
+else:
+    d['mcpServers']['playwright'] = {
+        'type': 'stdio',
+        'command': 'npx',
+        'args': ['-y', '@playwright/mcp@latest'],
+        'env': {}
+    }
+    with open(path, 'w') as f:
+        json.dump(d, f, indent=2)
+    print('installed')
 "
 ```
 
 - **`installed`** → reply:
-  > ✅ **Playwright MCP added to `~/.claude/settings.json`.**
+  > ✅ **Playwright MCP added to `~/.claude.json`.**
   >
   > Restart Claude Code to activate it. After that, you can use `/playwright-import` to copy any page into the prototype.
 

@@ -2,3 +2,4 @@
 .superset
 .DS_Store
 /state
+.playwright-mcp
