@@ -107,7 +107,7 @@ The complete list of every token is in [`specs/tokens/token-reference.md`](../sp
 
 ## Running the token audit
 
-The audit script scans every file in `ahoy-demo/src/` and flags raw values that should be tokens instead — hex colours, pixel values, raw durations.
+The audit script scans every file in `prototype/src/` and flags raw values that should be tokens instead — hex colours, pixel values, raw durations.
 
 ```bash
 node scripts/token-audit.js
@@ -124,9 +124,9 @@ node scripts/token-audit.js
 ```
 ❌ Token audit failed — 3 violations found.
 
-  ahoy-demo/src/App.css:14   color: #1a1a2e  → use var(--color-text)
-  ahoy-demo/src/App.css:27   margin: 16px    → use var(--space-4)
-  ahoy-demo/src/Hero.tsx:8   duration: 200ms → use var(--transition-border)
+  prototype/src/App.css:14   color: #1a1a2e  → use var(--color-text)
+  prototype/src/App.css:27   margin: 16px    → use var(--space-4)
+  prototype/src/Hero.tsx:8   duration: 200ms → use var(--transition-border)
 ```
 
 ### Fixing violations
@@ -144,6 +144,6 @@ Run the token audit and fix any violations you find.
 
 ## Where tokens are defined
 
-Token definitions live in `ahoy-demo/src/tokens.css`. These are Layer 2 tokens — semantic aliases that sit on top of Ahoy's raw design primitives. Claude reads this file to know which tokens are available before writing any styles.
+Token definitions live in `prototype/src/tokens.css`. These are Layer 2 tokens — semantic aliases that sit on top of Ahoy's raw design primitives. Claude reads this file to know which tokens are available before writing any styles.
 
 If a token you need doesn't exist, ask Claude to add it following the existing pattern in `tokens.css`.

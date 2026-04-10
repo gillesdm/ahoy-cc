@@ -1,6 +1,6 @@
 # Token Reference
 
-Master map of every CSS custom property defined in `ahoy-demo/src/tokens.css`.
+Master map of every CSS custom property defined in `prototype/src/tokens.css`.
 
 - **Layer 1** tokens are defined by `@teamleader/ahoy` — listed here for discoverability only.
 - **Layer 2** tokens are defined in `tokens.css` — use these in all component CSS.

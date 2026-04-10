@@ -34,7 +34,7 @@ Before passing the prototype to a developer, verify the following:
 Share the following in your handoff message:
 
 ```
-The prototype is in ahoy-demo/src/.
+The prototype is in prototype/src/.
 It follows the specs in specs/.
 Run node scripts/token-audit.js to confirm it's clean.
 ```

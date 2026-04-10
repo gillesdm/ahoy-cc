@@ -28,7 +28,7 @@ You need the following installed. If you're unsure about any of these, ask a dev
 Once prerequisites are in place, install the prototype's dependencies:
 
 ```bash
-cd ahoy-demo
+cd prototype
 npm install
 ```
 
@@ -43,7 +43,7 @@ You need two terminal windows open at the same time.
 ### Terminal 1 — Dev server
 
 ```bash
-cd ahoy-demo
+cd prototype
 npm run dev
 ```
 

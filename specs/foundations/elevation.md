@@ -3,7 +3,7 @@
 ## Metadata
 - **Category:** Foundation
 - **Status:** Stable
-- **Source:** `@teamleader/ahoy` + `ahoy-demo/src/tokens.css`
+- **Source:** `@teamleader/ahoy` + `prototype/src/tokens.css`
 
 ## Overview
 

@@ -3,7 +3,7 @@
 ## Metadata
 - **Category:** Pattern
 - **Status:** Stable
-- **File:** `ahoy-demo/src/App.css` — `#root`, `#center`, `#spacer`, `#next-steps`
+- **File:** `prototype/src/App.css` — `#root`, `#center`, `#spacer`, `#next-steps`
 
 ## Overview
 

@@ -31,7 +31,7 @@ Or open Claude Code from the VS Code extension / desktop app and navigate to thi
 The dev server runs separately — start it once and leave it running:
 
 ```bash
-cd ahoy-demo && npm install && npm run dev
+cd prototype && npm install && npm run dev
 ```
 
 Then open `http://localhost:5173` in your browser. It updates live as Claude edits files.
@@ -197,7 +197,7 @@ When your prototype is ready, the handoff is straightforward because:
 
 Tell the developer:
 ```
-The prototype is in ahoy-demo/src/. It follows the specs in specs/. Run the token audit to confirm it's clean.
+The prototype is in prototype/src/. It follows the specs in specs/. Run the token audit to confirm it's clean.
 ```
 
 ---

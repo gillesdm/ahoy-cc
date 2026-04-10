@@ -1,4 +1,4 @@
-# Ahoy Demo
+# Prototype
 
 A living prototype built on the [Ahoy design system](https://www.npmjs.com/package/@teamleader/ahoy) by Teamleader. Use it to explore components, turn Figma designs into specs, and generate working prototype pages — all through Claude Code commands.
 
@@ -86,7 +86,7 @@ node scripts/token-audit.js   # must exit 0
 ## Project structure
 
 ```
-ahoy-demo/src/
+prototype/src/
   App.tsx          — route definitions
   main.tsx         — entry point + CSS import order
   tokens.css       — design tokens

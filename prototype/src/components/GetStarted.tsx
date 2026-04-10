@@ -56,7 +56,7 @@ const STEPS = [
   {
     title: 'Start the prototype',
     desc:  'Run the dev server in one terminal, Claude Code in another.',
-    code:  'cd ahoy-demo && npm run dev\n# New terminal:\nclaude',
+    code:  'cd prototype && npm run dev\n# New terminal:\nclaude',
   },
   {
     title: 'Find or create a spec',
@@ -142,7 +142,7 @@ export function GetStarted() {
           Specs drive the prototype. Claude reads the spec, picks the right tokens,
           and produces correct components — without you needing to write any code.
         </p>
-        <CodeSnippet code={'cd ahoy-demo && npm install\nnpm run dev\n# Then in a new terminal:\nclaude'} />
+        <CodeSnippet code={'cd prototype && npm install\nnpm run dev\n# Then in a new terminal:\nclaude'} />
       </section>
 
       {/* ── 2. Two systems ── */}
@@ -158,7 +158,7 @@ export function GetStarted() {
             </p>
           </div>
           <div className="gs-card">
-            <div className="gs-card__path">ahoy-demo/</div>
+            <div className="gs-card__path">prototype/</div>
             <h3 className="gs-card__title">Live prototype</h3>
             <p className="gs-card__body">
               A Vite + React 18 app. Describe what you want to Claude and it edits the app in real

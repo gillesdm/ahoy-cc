@@ -4,7 +4,7 @@
 - **Name:** Next Steps
 - **Category:** Organism
 - **Status:** Demo
-- **File:** `ahoy-demo/src/App.css` — `#next-steps`, `#docs`, `#next-steps ul`
+- **File:** `prototype/src/App.css` — `#next-steps`, `#docs`, `#next-steps ul`
 
 ## Overview
 

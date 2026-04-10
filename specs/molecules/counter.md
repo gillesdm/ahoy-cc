@@ -4,7 +4,7 @@
 - **Name:** Counter
 - **Category:** Molecule
 - **Status:** Demo
-- **File:** `ahoy-demo/src/App.css` — `.counter`
+- **File:** `prototype/src/App.css` — `.counter`
 
 ## Overview
 

@@ -27,7 +27,7 @@ Two things working together:
 | | What it is | Where it lives |
 |---|---|---|
 | **Spec library** | Written design decisions for every Ahoy component — tokens, states, anatomy, usage rules | `specs/` |
-| **Live prototype** | A Vite + React app that Claude edits in real time as you describe what you want | `ahoy-demo/` |
+| **Live prototype** | A Vite + React app that Claude edits in real time as you describe what you want | `prototype/` |
 
 ---
 
@@ -49,7 +49,7 @@ Two things working together:
 
 ```bash
 # Install dependencies (once)
-cd ahoy-demo && npm install
+cd prototype && npm install
 
 # Start the prototype
 npm run dev
@@ -119,7 +119,7 @@ The shell layout (sidebar + top bar + content area) follows [specs/patterns/layo
 <details>
 <summary><strong>The browser shows a blank page.</strong></summary>
 
-Make sure Terminal 1 is running `npm run dev` inside the `ahoy-demo/` folder. If the terminal shows an error, check that Node.js v18+ is installed: `node --version`.
+Make sure Terminal 1 is running `npm run dev` inside the `prototype/` folder. If the terminal shows an error, check that Node.js v18+ is installed: `node --version`.
 </details>
 
 <details>
@@ -163,7 +163,7 @@ Or re-run `/figma-spec` with the same URL — Claude will offer to update the ex
 <details>
 <summary><strong>`npm install` failed.</strong></summary>
 
-Make sure you are inside the `ahoy-demo/` folder, not the project root. If errors mention Node.js version, run `node --version` — v18 or higher is required.
+Make sure you are inside the `prototype/` folder, not the project root. If errors mention Node.js version, run `node --version` — v18 or higher is required.
 </details>
 
 <details>
@@ -187,7 +187,7 @@ Build the notification banner from specs/organisms/notification-banner.md.
 <details>
 <summary><strong>How do I know the prototype is ready to hand off?</strong></summary>
 
-Run `node scripts/token-audit.js` — it must exit with zero violations. Check that every component you've added has a spec file in `specs/`. Then share `ahoy-demo/src/` and `specs/` with the developer. See [docs/handoff.md](docs/handoff.md) for the full checklist.
+Run `node scripts/token-audit.js` — it must exit with zero violations. Check that every component you've added has a spec file in `specs/`. Then share `prototype/src/` and `specs/` with the developer. See [docs/handoff.md](docs/handoff.md) for the full checklist.
 </details>
 
 ---

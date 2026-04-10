@@ -1,5 +1,5 @@
 ---
-description: Navigate to a URL with Playwright, map the main content area to Ahoy components, and generate a full routed page in the ahoy-demo prototype
+description: Navigate to a URL with Playwright, map the main content area to Ahoy components, and generate a full routed page in the prototype
 argument-hint: "\"<URL>\" [\"natural language action to perform first\"]"
 allowed-tools: Bash Glob Grep Read Write Edit AskUserQuestion
 ---
@@ -159,10 +159,10 @@ Present the following as formatted Markdown in the chat (not written to any file
 ### Files
 | File | Action |
 |------|--------|
-| ahoy-demo/src/pages/{pageName}.tsx | CREATE |
-| ahoy-demo/src/pages/{pageName}.css | CREATE |
-| ahoy-demo/src/App.tsx | EDIT — add Route + import |
-| ahoy-demo/src/components/Sidebar.tsx | EDIT or no change needed |
+| prototype/src/pages/{pageName}.tsx | CREATE |
+| prototype/src/pages/{pageName}.css | CREATE |
+| prototype/src/App.tsx | EDIT — add Route + import |
+| prototype/src/components/Sidebar.tsx | EDIT or no change needed |
 
 ### Component mapping
 | Source element | Ahoy component | Import |
@@ -195,9 +195,9 @@ If the user provides a correction: apply it to the mapping, regenerate the plan 
 Only proceed after approval in Step 3.
 
 ### 4a. Read existing files first
-Read `ahoy-demo/src/App.tsx` and `ahoy-demo/src/components/Sidebar.tsx` in full before editing either. The `Edit` tool requires exact string matches — you need the actual content including whitespace.
+Read `prototype/src/App.tsx` and `prototype/src/components/Sidebar.tsx` in full before editing either. The `Edit` tool requires exact string matches — you need the actual content including whitespace.
 
-### 4b. Write `ahoy-demo/src/pages/{pageName}.tsx`
+### 4b. Write `prototype/src/pages/{pageName}.tsx`
 
 ```tsx
 import './{pageName}.css';
@@ -224,7 +224,7 @@ Rules:
 - No inline styles — all visual values go in the CSS file
 - For DataGrid-worthy tables: use `<table>`, `<thead>`, `<tbody>`, `<tr>`, `<th>`, `<td>` with CSS class names
 
-### 4c. Write `ahoy-demo/src/pages/{pageName}.css`
+### 4c. Write `prototype/src/pages/{pageName}.css`
 
 All values **must** be `var(--token)` references — no raw hex, px values, numeric font-weight, or raw durations.
 
@@ -242,7 +242,7 @@ Token reference:
 - Elevation: `var(--elevation-1)` … `var(--elevation-4)`
 - Transition: `var(--transition-border)`, `var(--transition-shadow)`
 
-### 4d. Edit `ahoy-demo/src/App.tsx`
+### 4d. Edit `prototype/src/App.tsx`
 
 **Import** — add after existing page imports:
 ```tsx
@@ -267,7 +267,7 @@ const PATH_LABELS = {
 };
 ```
 
-### 4e. Edit `ahoy-demo/src/components/Sidebar.tsx`
+### 4e. Edit `prototype/src/components/Sidebar.tsx`
 
 - If `routePath` matches an existing `NAV_ITEMS` entry: **no change needed**
 - If adding a new route: add to `NAV_ITEMS` and add the icon import at the top:
@@ -289,7 +289,7 @@ If exit code is non-zero: read the errors, fix each violating CSS line by replac
 ### 4g. TypeScript check
 
 ```bash
-cd ahoy-demo && npx tsc --noEmit
+cd prototype && npx tsc --noEmit
 ```
 
 If errors appear: fix the TypeScript issues in the generated files (wrong prop types, missing imports, incorrect component APIs) and re-run. Do not claim completion until this exits 0.
@@ -309,8 +309,8 @@ Before reporting done, confirm every item:
 - [ ] New-component candidates categorised: `no-ahoy` or `repeated`
 - [ ] Plan review presented with mapping table and new-component candidates
 - [ ] User explicitly approved before any files were written
-- [ ] `ahoy-demo/src/pages/{pageName}.tsx` created
-- [ ] `ahoy-demo/src/pages/{pageName}.css` created with `var(--token)` references only
+- [ ] `prototype/src/pages/{pageName}.tsx` created
+- [ ] `prototype/src/pages/{pageName}.css` created with `var(--token)` references only
 - [ ] All Ahoy imports use direct paths, not the barrel export
 - [ ] `App.tsx` updated with Route and import
 - [ ] `Sidebar.tsx` updated or confirmed no change needed

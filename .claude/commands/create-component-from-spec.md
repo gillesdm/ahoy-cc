@@ -12,7 +12,7 @@ allowed-tools: Glob Grep Read Write Bash AskUserQuestion
 
 Run these **in parallel**:
 - `Glob specs/**/*.md` → build the spec inventory (canonical name + path for every file)
-- `Glob ahoy-demo/src/components/*.tsx` → list existing local component files
+- `Glob prototype/src/components/*.tsx` → list existing local component files
 
 **Resolve the argument:**
 
@@ -66,7 +66,7 @@ For every non-foundation spec linked in Uses, read that spec file. Extract:
 Condition: the referenced spec has an `**Import:**` containing `@teamleader/ahoy`.
 Verify with Glob:
 ```
-ahoy-demo/node_modules/@teamleader/ahoy/dist/es/components/{name}/**
+prototype/node_modules/@teamleader/ahoy/dist/es/components/{name}/**
 ```
 If at least one file matches → confirmed Ahoy. Record the exact import path from the spec.
 
@@ -74,7 +74,7 @@ If at least one file matches → confirmed Ahoy. Record the exact import path fr
 Condition: no Ahoy import, OR Ahoy package lookup produced no results.
 Check with Glob:
 ```
-ahoy-demo/src/components/{ComponentName}.tsx
+prototype/src/components/{ComponentName}.tsx
 ```
 If found → confirmed local. Record the relative import path.
 
@@ -83,7 +83,7 @@ Neither check produced a result. Will be implemented as an inline placeholder in
 
 ## Step 3 — Check output path
 
-Check whether `ahoy-demo/src/components/{ComponentName}.tsx` already exists (it will appear in the Glob from Step 0).
+Check whether `prototype/src/components/{ComponentName}.tsx` already exists (it will appear in the Glob from Step 0).
 
 If it exists → flag it in the plan as "(already exists — will overwrite)".
 
@@ -97,8 +97,8 @@ Format the question body exactly like this (fill in real values; omit any sectio
 Here's what I'll create from `{spec-path}`:
 
 **Output files:**
-- `ahoy-demo/src/components/{ComponentName}.tsx` _(already exists — will overwrite)_ ← only if applicable
-- `ahoy-demo/src/components/{ComponentName}.css`
+- `prototype/src/components/{ComponentName}.tsx` _(already exists — will overwrite)_ ← only if applicable
+- `prototype/src/components/{ComponentName}.css`
 
 **Sub-components from `@teamleader/ahoy`:**
 | Component | Import |
@@ -183,8 +183,8 @@ node scripts/token-audit.js
 
 ```
 Created:
-  ahoy-demo/src/components/{ComponentName}.tsx
-  ahoy-demo/src/components/{ComponentName}.css
+  prototype/src/components/{ComponentName}.tsx
+  prototype/src/components/{ComponentName}.css
 
 Sub-components used:
   @teamleader/ahoy  — {Name}, {Name}

@@ -1,4 +1,4 @@
-# Design Specs — Ahoy Demo
+# Design Specs — Prototype
 
 ## Project
 
@@ -22,7 +22,7 @@ The key ideas:
 ## Guidelines
 
 > Before writing or modifying any UI code, read the relevant spec file in `specs/`.
-> Use only tokens from `ahoy-demo/src/tokens.css`. Run the token audit script before
+> Use only tokens from `prototype/src/tokens.css`. Run the token audit script before
 > committing. **Zero errors required.**
 
 ### Workflow
@@ -106,11 +106,11 @@ The sidebar will render the link automatically. The TopBar heading is derived fr
 
 ### 2. Create the page component
 
-Create `ahoy-demo/src/pages/Reports.tsx` (and a matching `Reports.css` if needed).
+Create `prototype/src/pages/Reports.tsx` (and a matching `Reports.css` if needed).
 Read the relevant spec in `specs/` before writing any UI. All styling must use `var(--token)` references — no raw values.
 
 ```tsx
-// ahoy-demo/src/pages/Reports.tsx
+// prototype/src/pages/Reports.tsx
 export default function ReportsPage() {
   return <div className="reports-page">…</div>;
 }
@@ -175,12 +175,12 @@ The optional action lets you navigate to a specific state before scraping (e.g. 
 
 | Purpose | Path |
 |---------|------|
-| Token definitions (Layer 2) | `ahoy-demo/src/tokens.css` |
-| Global reset | `ahoy-demo/src/index.css` |
-| App styles | `ahoy-demo/src/App.css` |
-| Router entry point | `ahoy-demo/src/main.tsx` |
-| Route definitions | `ahoy-demo/src/App.tsx` |
-| Nav items + sidebar | `ahoy-demo/src/components/Sidebar.tsx` |
+| Token definitions (Layer 2) | `prototype/src/tokens.css` |
+| Global reset | `prototype/src/index.css` |
+| App styles | `prototype/src/App.css` |
+| Router entry point | `prototype/src/main.tsx` |
+| Route definitions | `prototype/src/App.tsx` |
+| Nav items + sidebar | `prototype/src/components/Sidebar.tsx` |
 | Foundation specs | `specs/foundations/` — color, spacing, typography, radius, elevation, motion |
 | Atom specs | `specs/atoms/` — 35+ single-responsibility components |
 | Molecule specs | `specs/molecules/` — 25+ composite components |

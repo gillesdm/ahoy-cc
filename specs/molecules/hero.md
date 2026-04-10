@@ -4,7 +4,7 @@
 - **Name:** Hero
 - **Category:** Molecule
 - **Status:** Demo
-- **File:** `ahoy-demo/src/App.css` — `.hero`, `.hero .base`, `.hero .framework`, `.hero .vite`
+- **File:** `prototype/src/App.css` — `.hero`, `.hero .base`, `.hero .framework`, `.hero .vite`
 
 ## Overview
 

@@ -13,7 +13,7 @@
  *           font-size, font-weight in component CSS. Must be zero to pass.
  *   WARNING Raw transition durations, z-index values. Informational only.
  *
- * Token reference: ahoy-demo/src/tokens.css
+ * Token reference: prototype/src/tokens.css
  */
 
 'use strict';
@@ -26,7 +26,7 @@ const args    = process.argv.slice(2);
 const dirArg  = args.includes('--dir') ? args[args.indexOf('--dir') + 1] : null;
 const SCAN_DIR = dirArg
   ? path.resolve(dirArg)
-  : path.join(__dirname, '../ahoy-demo/src');
+  : path.join(__dirname, '../prototype/src');
 const VERBOSE = args.includes('--verbose');
 
 // ─── Token suggestion maps ────────────────────────────────────────────────────

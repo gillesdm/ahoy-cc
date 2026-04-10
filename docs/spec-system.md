@@ -153,4 +153,4 @@ Claude will:
 3. Wait for your approval before writing anything
 4. Run the token audit automatically and fix any violations before finishing
 
-This works for any spec in any category. The output files go into `ahoy-demo/src/components/` and are ready to use immediately.
+This works for any spec in any category. The output files go into `prototype/src/components/` and are ready to use immediately.
