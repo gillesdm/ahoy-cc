@@ -18,10 +18,27 @@ Parse `$ARGUMENTS` using the same rules as playwright-import: quoted strings →
 
 - **MAX_ITERATIONS**: 5
 - **VIEWPORT**: 1920 × 1080 (Full HD — provides consistent, high-resolution screenshots that reveal spacing and alignment issues invisible at lower resolutions)
-- **SUCCESS_THRESHOLD**: "no critical or medium differences remain"
+- **SUCCESS_THRESHOLD**: zero CRITICAL, zero MEDIUM, and all **structural elements present** (every visible element from the reference must render in local — this is a strict check, not subjective)
 - **PLATEAU_THRESHOLD**: two consecutive iterations with no measurable improvement
 - **CSS_FILE**: `prototype/src/pages/{PageName}.css`
 - **TSX_FILE**: `prototype/src/pages/{PageName}.tsx`
+
+### Structural-completeness gate (pixel-perfect prototypes)
+
+Before scoring severity, **enumerate every distinct visual element** in the reference image (toolbar buttons, grid cells, row subtitles, status indicators, scroll bars, icons, pseudo-element underlines). If *any* element from the reference is **missing** in the local render, that is a CRITICAL automatically — regardless of how close the rest looks. The visual-match skill must NOT report SUCCESS while structural elements are missing.
+
+### Structural element checklist per page type
+
+For any data-grid / planning / calendar / dashboard page, verify:
+- [ ] Column header row renders ALL column labels visibly
+- [ ] Row heights match reference (typical: 48–60px per row)
+- [ ] Multi-line rows are preserved (name + subtitle, title + description)
+- [ ] Conditional cell states are rendered (overbooked, weekend, disabled, today-highlight) — each should be visually distinct
+- [ ] Small icons on cells are rendered at correct size (usually 14×14 inline or 24×24 toolbar)
+- [ ] Pseudo-element decorations (underlines, side-bars, status dots) are rendered
+- [ ] Scrollbar appears if content exceeds viewport
+- [ ] Sticky headers / sidebars stay pinned on scroll
+- [ ] Row striping / alternating backgrounds applied where reference shows them
 
 ### Screenshot naming convention
 
@@ -204,11 +221,20 @@ Overall: {HIGH / MEDIUM / LOW / NEGLIGIBLE}
 
 ---
 
-### Step D — Convergence check
+### Step D — Convergence check (strict)
 
-**Stop with success** if: no CRITICAL or MEDIUM differences remain (score is LOW or NEGLIGIBLE).
-**Continue** if: any CRITICAL or MEDIUM differences remain AND iteration < MAX_ITERATIONS.
-**Stop with plateau** if: score has not changed (same categories, same severities) compared to the previous iteration.
+**Before any convergence decision, verify the structural-completeness gate.** Walk the reference one more time and list every distinct element type. For each, confirm it appears in local. If **any** reference element is missing, promote that item to CRITICAL regardless of prior severity.
+
+**Stop with success** only if ALL of the following hold:
+1. Zero CRITICAL differences
+2. Zero MEDIUM differences
+3. Structural completeness: every element type from the reference is present in local
+4. Pixel-diff ratio ≤ iteration's threshold (iter 1: 5%, iter 2: 3%, iter 3: 2%, iter 4: 1%, iter 5: 0.5%)
+
+**Continue** if: any of (1)(2)(3)(4) fails AND iteration < MAX_ITERATIONS.
+**Stop with plateau** if: score has not changed (same categories, same severities) AND no fixes were applied last iteration.
+
+> **Do not declare SUCCESS on LOW-only when the local is missing elements from the reference.** A pixel-perfect prototype requires every element to be present — a cleaner "stub" is not acceptable as a success state.
 
 ---
 
